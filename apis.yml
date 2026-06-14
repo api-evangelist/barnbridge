@@ -1,0 +1,144 @@
+name: BarnBridge
+description: BarnBridge is a risk tokenization DeFi protocol that allows users to hedge yield sensitivity and price volatility by transforming debt pools into structured products with varying risk and return characteristics. It offers SMART Yield bonds with junior and senior tranches, SMART Alpha for price volatility management, SMART Exposure for automated rebalancing, and yield farming analytics via a REST API.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/apis.yml
+created: '2026-06-14'
+modified: '2026-06-14'
+specificationVersion: '0.19'
+tags:
+  - DeFi
+  - Risk Tokenization
+  - Yield
+  - Blockchain
+  - Ethereum
+  - SMART Yield
+  - Structured Products
+  - Tranches
+apis:
+  - name: BarnBridge SMART Yield API
+    description: REST API for querying SMART Yield structured product pools, senior and junior bond positions, tranche data, APY trends, liquidity, and user portfolio analytics.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://barnbridge.com/smart-yield/
+    baseURL: https://api-v2.barnbridge.com
+    tags:
+      - SMART Yield
+      - Bonds
+      - Tranches
+      - Yield
+      - DeFi
+    properties:
+      - type: Documentation
+        url: https://barnbridge.gitbook.io/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/openapi.yml
+    contact:
+      - FN: BarnBridge Discord
+        url: https://discord.com/invite/FfEhsVk
+    meta:
+      - key: github-repository
+        value: https://github.com/BarnBridge/internal-api
+  - name: BarnBridge Governance API
+    description: REST API for querying BarnBridge DAO governance proposals, votes, voter lists, abrogation proposals, treasury transactions, and protocol overview data.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://barnbridge.com/
+    baseURL: https://api-v2.barnbridge.com
+    tags:
+      - Governance
+      - DAO
+      - Voting
+      - Treasury
+      - DeFi
+    properties:
+      - type: Documentation
+        url: https://barnbridge.gitbook.io/docs
+    contact:
+      - FN: BarnBridge Discord
+        url: https://discord.com/invite/FfEhsVk
+    meta:
+      - key: github-repository
+        value: https://github.com/BarnBridge/internal-api
+  - name: BarnBridge SMART Alpha API
+    description: REST API for querying SMART Alpha pools, token price charts, pool performance history, previous epochs, user portfolio values, queue positions, and transactions.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://barnbridge.com/
+    baseURL: https://api-v2.barnbridge.com
+    tags:
+      - SMART Alpha
+      - Price Volatility
+      - Epochs
+      - DeFi
+    properties:
+      - type: Documentation
+        url: https://barnbridge.gitbook.io/docs
+    contact:
+      - FN: BarnBridge Discord
+        url: https://discord.com/invite/FfEhsVk
+    meta:
+      - key: github-repository
+        value: https://github.com/BarnBridge/internal-api
+  - name: BarnBridge SMART Exposure API
+    description: REST API for querying SMART Exposure pools, tranches, eToken price charts, price trends, liquidity charts, ratio deviation analytics, transactions, and user portfolio values.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://barnbridge.com/
+    baseURL: https://api-v2.barnbridge.com
+    tags:
+      - SMART Exposure
+      - Tranches
+      - eToken
+      - Rebalancing
+      - DeFi
+    properties:
+      - type: Documentation
+        url: https://barnbridge.gitbook.io/docs
+    contact:
+      - FN: BarnBridge Discord
+        url: https://discord.com/invite/FfEhsVk
+    meta:
+      - key: github-repository
+        value: https://github.com/BarnBridge/internal-api
+  - name: BarnBridge Yield Farming API
+    description: REST API for querying BarnBridge yield farming staking actions list and historical chart data for analytics and monitoring.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://barnbridge.com/
+    baseURL: https://api-v2.barnbridge.com
+    tags:
+      - Yield Farming
+      - Staking
+      - Analytics
+      - DeFi
+    properties:
+      - type: Documentation
+        url: https://barnbridge.gitbook.io/docs
+    contact:
+      - FN: BarnBridge Discord
+        url: https://discord.com/invite/FfEhsVk
+    meta:
+      - key: github-repository
+        value: https://github.com/BarnBridge/internal-api
+common:
+  - type: GitHub Organization
+    url: https://github.com/BarnBridge
+  - type: Website
+    url: https://barnbridge.com
+  - type: Application
+    url: https://app.barnbridge.com
+  - type: Documentation
+    url: https://barnbridge.gitbook.io/docs
+  - type: Discord
+    url: https://discord.com/invite/FfEhsVk
+  - type: Twitter
+    url: https://twitter.com/barn_bridge
+  - type: Forum
+    url: https://forum.barnbridge.com
+  - type: Whitepaper
+    url: https://github.com/BarnBridge/BarnBridge-Whitepaper
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/finops/finops.yml
+maintainers:
+  - FN: API Evangelist
+    url: https://apievangelist.com
+    email: info@apievangelist.com

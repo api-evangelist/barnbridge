@@ -1,0 +1,10 @@
+name: BarnBridge API Plans
+description: BarnBridge is a decentralized protocol with open-source smart contracts and a self-hosted internal API. The API is open and publicly accessible without API keys or subscriptions. Access is free to all users interacting with the BarnBridge application or integrating directly.
+plans:
+  - name: Open Access
+    description: The BarnBridge internal API is open and free to use. No authentication, API keys, or rate limit tiers are published. The API is self-hosted infrastructure backing the BarnBridge application at api-v2.barnbridge.com.
+    url: https://barnbridge.gitbook.io/docs
+    type: free
+    authentication:
+      - type: None
+        description: No API key or authentication required for public endpoints.

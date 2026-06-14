@@ -1,0 +1,17 @@
+name: BarnBridge API FinOps
+description: BarnBridge is a decentralized protocol. Its internal REST API is open infrastructure with no usage fees, subscriptions, or metered billing. Protocol revenue and tokenomics are governed by the BarnBridge DAO using the BOND governance token.
+costs:
+  - name: Free API Access
+    description: No cost to query the BarnBridge API. The API is open infrastructure with no metered billing.
+    type: free
+  - name: Gas Fees
+    description: Interactions with BarnBridge smart contracts on Ethereum or other supported chains require paying gas fees in the native chain currency (ETH). These are blockchain transaction costs, not API fees.
+    type: blockchain-transaction
+  - name: Protocol Fees
+    description: Some BarnBridge products may charge protocol-level fees on yield or structured product positions. These are governed by the BarnBridge DAO and are separate from API access costs.
+    url: https://barnbridge.gitbook.io/docs/faq
+    type: protocol
+governance:
+  - name: BOND Token Governance
+    description: Protocol parameters including fees are controlled by BOND token holders via the BarnBridge DAO governance system.
+    url: https://forum.barnbridge.com

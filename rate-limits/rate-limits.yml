@@ -1,0 +1,6 @@
+name: BarnBridge API Rate Limits
+description: BarnBridge does not publish formal rate limiting policies for its internal API. The API is open infrastructure backing the BarnBridge DeFi application. No official rate limit documentation is available; users should apply reasonable request rates and avoid aggressive polling.
+rateLimits:
+  - name: Undocumented
+    description: No official rate limits are published by BarnBridge. The API is intended for use by the BarnBridge frontend application. Integrators should use conservative request rates to avoid disrupting service.
+    url: https://barnbridge.gitbook.io/docs
