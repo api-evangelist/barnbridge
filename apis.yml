@@ -51,6 +51,8 @@ apis:
     properties:
       - type: Documentation
         url: https://barnbridge.gitbook.io/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/openapi/openapi.yml
     contact:
       - FN: BarnBridge Discord
         url: https://discord.com/invite/FfEhsVk
@@ -70,6 +72,8 @@ apis:
     properties:
       - type: Documentation
         url: https://barnbridge.gitbook.io/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/openapi/openapi.yml
     contact:
       - FN: BarnBridge Discord
         url: https://discord.com/invite/FfEhsVk
@@ -90,6 +94,8 @@ apis:
     properties:
       - type: Documentation
         url: https://barnbridge.gitbook.io/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/openapi/openapi.yml
     contact:
       - FN: BarnBridge Discord
         url: https://discord.com/invite/FfEhsVk
@@ -109,6 +115,8 @@ apis:
     properties:
       - type: Documentation
         url: https://barnbridge.gitbook.io/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/openapi/openapi.yml
     contact:
       - FN: BarnBridge Discord
         url: https://discord.com/invite/FfEhsVk
@@ -116,6 +124,16 @@ apis:
       - key: github-repository
         value: https://github.com/BarnBridge/internal-api
 common:
+  - type: JSONLDContext
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-ld/context.jsonld
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-schema/smart-yield-pool.json
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-schema/governance-proposal.json
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-schema/smart-alpha-pool.json
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-schema/smart-exposure-tranche.json
   - type: GitHub Organization
     url: https://github.com/BarnBridge
   - type: Website

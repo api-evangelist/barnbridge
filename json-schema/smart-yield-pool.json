@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/barnbridge/main/json-schema/smart-yield-pool.json",
+  "title": "SmartYieldPool",
+  "description": "A BarnBridge SMART Yield structured-product pool with senior and junior tranches.",
+  "type": "object",
+  "properties": {
+    "protocolId": {
+      "type": "string",
+      "description": "Originator protocol identifier (e.g. compound/v2, aave/v2).",
+      "example": "compound/v2"
+    },
+    "smartYieldAddress": {
+      "type": "string",
+      "description": "Ethereum address of the SMART Yield pool contract.",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "controllerAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "modelAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "providerAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "oracleAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "juniorBondAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "seniorBondAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "cTokenAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "underlyingAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "underlyingSymbol": {
+      "type": "string",
+      "example": "USDC"
+    },
+    "underlyingDecimals": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18,
+      "example": 6
+    },
+    "rewardPoolAddress": {
+      "type": "string",
+      "pattern": "^(0x[0-9a-fA-F]{40})?$"
+    },
+    "state": {
+      "$ref": "#/$defs/PoolState"
+    }
+  },
+  "required": [
+    "protocolId",
+    "smartYieldAddress",
+    "underlyingSymbol",
+    "underlyingDecimals",
+    "state"
+  ],
+  "$defs": {
+    "PoolState": {
+      "type": "object",
+      "description": "Current on-chain state snapshot for the pool.",
+      "properties": {
+        "blockNumber": {
+          "type": "integer"
+        },
+        "blockTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "seniorLiquidity": {
+          "type": "string",
+          "description": "Senior tranche liquidity in underlying token (decimal string)."
+        },
+        "juniorLiquidity": {
+          "type": "string",
+          "description": "Junior tranche liquidity in underlying token (decimal string)."
+        },
+        "jTokenPrice": {
+          "type": "string",
+          "description": "Price of 1 jToken in underlying, normalized to 18 decimals."
+        },
+        "seniorApy": {
+          "type": "number"
+        },
+        "juniorApy": {
+          "type": "number"
+        },
+        "juniorAPYPast30DAvg": {
+          "type": "number"
+        },
+        "originatorApy": {
+          "type": "number"
+        },
+        "originatorNetApy": {
+          "type": "number"
+        },
+        "avgSeniorMaturityDays": {
+          "type": "number"
+        },
+        "numberOfSeniors": {
+          "type": "integer"
+        },
+        "numberOfJuniors": {
+          "type": "integer"
+        },
+        "numberOfJuniorsLocked": {
+          "type": "integer"
+        },
+        "juniorLiquidityLocked": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

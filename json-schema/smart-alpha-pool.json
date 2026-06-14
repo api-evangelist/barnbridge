@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/barnbridge/main/json-schema/smart-alpha-pool.json",
+  "title": "SmartAlphaPool",
+  "description": "A BarnBridge SMART Alpha price-volatility management pool.",
+  "type": "object",
+  "properties": {
+    "poolName": {
+      "type": "string",
+      "example": "WBTC-USD"
+    },
+    "poolAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "poolToken": {
+      "$ref": "#/$defs/Token"
+    },
+    "juniorTokenAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "seniorTokenAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "oracleAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "oracleAssetSymbol": {
+      "type": "string",
+      "example": "BTC/USD"
+    },
+    "seniorRateModelAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "accountingModelAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "epoch1Start": {
+      "type": "integer",
+      "description": "Unix timestamp of the start of epoch 1."
+    },
+    "epochDuration": {
+      "type": "integer",
+      "description": "Duration of each epoch in seconds."
+    },
+    "state": {
+      "$ref": "#/$defs/PoolState"
+    },
+    "tvl": {
+      "$ref": "#/$defs/PoolTVL"
+    },
+    "userHasActivePosition": {
+      "type": ["boolean", "null"],
+      "description": "Whether the queried user has an active position; null if no user address was provided."
+    }
+  },
+  "required": ["poolName", "poolAddress", "poolToken", "state", "tvl"],
+  "$defs": {
+    "Token": {
+      "type": "object",
+      "properties": {
+        "address": { "type": "string" },
+        "symbol": { "type": "string" },
+        "decimals": { "type": "integer" }
+      }
+    },
+    "PoolState": {
+      "type": "object",
+      "properties": {
+        "epoch": { "type": "integer" },
+        "seniorLiquidity": { "type": "string" },
+        "juniorLiquidity": { "type": "string" },
+        "upsideExposureRate": { "type": "string" },
+        "downsideProtectionRate": { "type": "string" }
+      }
+    },
+    "PoolTVL": {
+      "type": "object",
+      "properties": {
+        "epochJuniorTVL": { "type": "number" },
+        "epochSeniorTVL": { "type": "number" },
+        "juniorEntryQueueTVL": { "type": "number" },
+        "seniorEntryQueueTVL": { "type": "number" },
+        "juniorExitQueueTVL": { "type": "number" },
+        "seniorExitQueueTVL": { "type": "number" },
+        "juniorExitedTVL": { "type": "number" },
+        "seniorExitedTVL": { "type": "number" }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/barnbridge/main/json-schema/smart-exposure-tranche.json",
+  "title": "SmartExposureTranche",
+  "description": "A BarnBridge SMART Exposure eToken tranche for automated token-ratio rebalancing.",
+  "type": "object",
+  "properties": {
+    "poolAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "eTokenAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "eTokenSymbol": {
+      "type": "string",
+      "example": "bb_ET_50WBTC50WETH"
+    },
+    "sFactorE": {
+      "type": "string",
+      "description": "Scaling factor for the eToken (decimal string)."
+    },
+    "targetRatio": {
+      "type": "string",
+      "description": "Target tokenA/tokenB ratio (decimal string)."
+    },
+    "tokenARatio": {
+      "type": "string",
+      "description": "Current tokenA ratio."
+    },
+    "tokenBRatio": {
+      "type": "string",
+      "description": "Current tokenB ratio."
+    },
+    "tokenA": {
+      "$ref": "#/$defs/Token"
+    },
+    "tokenB": {
+      "$ref": "#/$defs/Token"
+    },
+    "rebalancingInterval": {
+      "type": "integer",
+      "description": "Minimum rebalancing interval in seconds."
+    },
+    "rebalancingCondition": {
+      "type": "string",
+      "description": "Condition expression that triggers rebalancing."
+    }
+  },
+  "required": ["eTokenAddress", "eTokenSymbol", "targetRatio", "tokenA", "tokenB"],
+  "$defs": {
+    "Token": {
+      "type": "object",
+      "properties": {
+        "address": { "type": "string" },
+        "symbol": { "type": "string" },
+        "decimals": { "type": "integer" }
+      }
+    }
+  }
+}

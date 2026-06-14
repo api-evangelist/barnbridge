@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/barnbridge/main/json-schema/governance-proposal.json",
+  "title": "GovernanceProposal",
+  "description": "A BarnBridge DAO governance proposal.",
+  "type": "object",
+  "properties": {
+    "proposalId": {
+      "type": "integer",
+      "description": "Unique sequential identifier of the proposal."
+    },
+    "proposer": {
+      "type": "string",
+      "description": "Ethereum address of the account that submitted the proposal.",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Short human-readable title of the proposal."
+    },
+    "description": {
+      "type": "string",
+      "description": "Full description or body text of the proposal."
+    },
+    "createTime": {
+      "type": "integer",
+      "description": "Unix timestamp when the proposal was created."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current lifecycle state of the proposal.",
+      "enum": [
+        "WARMUP",
+        "ACTIVE",
+        "ACCEPTED",
+        "QUEUED",
+        "GRACE",
+        "CANCELED",
+        "FAILED",
+        "ABROGATED",
+        "EXPIRED"
+      ]
+    },
+    "stateTimeLeft": {
+      "type": ["integer", "null"],
+      "description": "Seconds remaining in the current state, or null if no time limit."
+    },
+    "forVotes": {
+      "type": "string",
+      "description": "Aggregate voting power in favor (decimal string)."
+    },
+    "againstVotes": {
+      "type": "string",
+      "description": "Aggregate voting power against (decimal string)."
+    }
+  },
+  "required": [
+    "proposalId",
+    "proposer",
+    "title",
+    "createTime",
+    "state",
+    "forVotes",
+    "againstVotes"
+  ]
+}
