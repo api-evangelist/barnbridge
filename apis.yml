@@ -1,6 +1,6 @@
 name: BarnBridge
 description: BarnBridge is a risk tokenization DeFi protocol that allows users to hedge yield sensitivity and price volatility by transforming debt pools into structured products with varying risk and return characteristics. It offers SMART Yield bonds with junior and senior tranches, SMART Alpha for price volatility management, SMART Exposure for automated rebalancing, and yield farming analytics via a REST API.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/apis.yml
 created: '2026-06-14'
 modified: '2026-06-14'
@@ -17,7 +17,7 @@ tags:
 apis:
   - name: BarnBridge SMART Yield API
     description: REST API for querying SMART Yield structured product pools, senior and junior bond positions, tranche data, APY trends, liquidity, and user portfolio analytics.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://barnbridge.com/smart-yield/
     baseURL: https://api-v2.barnbridge.com
     tags:
@@ -39,7 +39,7 @@ apis:
         value: https://github.com/BarnBridge/internal-api
   - name: BarnBridge Governance API
     description: REST API for querying BarnBridge DAO governance proposals, votes, voter lists, abrogation proposals, treasury transactions, and protocol overview data.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://barnbridge.com/
     baseURL: https://api-v2.barnbridge.com
     tags:
@@ -61,7 +61,7 @@ apis:
         value: https://github.com/BarnBridge/internal-api
   - name: BarnBridge SMART Alpha API
     description: REST API for querying SMART Alpha pools, token price charts, pool performance history, previous epochs, user portfolio values, queue positions, and transactions.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://barnbridge.com/
     baseURL: https://api-v2.barnbridge.com
     tags:
@@ -82,7 +82,7 @@ apis:
         value: https://github.com/BarnBridge/internal-api
   - name: BarnBridge SMART Exposure API
     description: REST API for querying SMART Exposure pools, tranches, eToken price charts, price trends, liquidity charts, ratio deviation analytics, transactions, and user portfolio values.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://barnbridge.com/
     baseURL: https://api-v2.barnbridge.com
     tags:
@@ -104,7 +104,7 @@ apis:
         value: https://github.com/BarnBridge/internal-api
   - name: BarnBridge Yield Farming API
     description: REST API for querying BarnBridge yield farming staking actions list and historical chart data for analytics and monitoring.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://barnbridge.com/
     baseURL: https://api-v2.barnbridge.com
     tags:
