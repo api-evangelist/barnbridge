@@ -134,7 +134,7 @@ common:
     url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-schema/smart-alpha-pool.json
   - type: JSONSchema
     url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-schema/smart-exposure-tranche.json
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/BarnBridge
   - type: Website
     url: https://barnbridge.com
@@ -146,7 +146,7 @@ common:
     url: https://discord.com/invite/FfEhsVk
   - type: Twitter
     url: https://twitter.com/barn_bridge
-  - type: Forum
+  - type: Forums
     url: https://forum.barnbridge.com
   - type: Whitepaper
     url: https://github.com/BarnBridge/BarnBridge-Whitepaper
