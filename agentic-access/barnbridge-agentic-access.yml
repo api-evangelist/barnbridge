@@ -1,0 +1,494 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 48
+  by_action_class:
+    connected: 48
+  by_consequence:
+    read: 48
+  human_in_the_loop_required: 0
+operations:
+- path: /api/smartyield/pools
+  method: get
+  operationId: listSmartYieldPools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/pools/{address}
+  method: get
+  operationId: getSmartYieldPool
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/pools/{address}/apy
+  method: get
+  operationId: getSmartYieldPoolAPYTrend
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/pools/{address}/liquidity
+  method: get
+  operationId: getSmartYieldPoolLiquidity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/pools/{address}/transactions
+  method: get
+  operationId: listSmartYieldPoolTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/pools/{address}/senior-bonds
+  method: get
+  operationId: listSmartYieldSeniorBonds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/pools/{address}/junior-bonds
+  method: get
+  operationId: listSmartYieldJuniorBonds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/rewards/pools
+  method: get
+  operationId: listSmartYieldRewardPools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/rewards/pools/{poolAddress}/transactions
+  method: get
+  operationId: listSmartYieldRewardPoolTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/rewards/v2/pools
+  method: get
+  operationId: listSmartYieldRewardPoolsV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/rewards/v2/pools/{poolAddress}/transactions
+  method: get
+  operationId: listSmartYieldRewardPoolTransactionsV2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/users/{address}/history
+  method: get
+  operationId: getSmartYieldUserHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/users/{address}/redeems/senior
+  method: get
+  operationId: getSmartYieldUserSeniorRedeems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/users/{address}/junior-past-positions
+  method: get
+  operationId: getSmartYieldUserJuniorPastPositions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/users/{address}/portfolio-value
+  method: get
+  operationId: getSmartYieldUserPortfolioValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/users/{address}/portfolio-value/junior
+  method: get
+  operationId: getSmartYieldUserJuniorPortfolioValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartyield/users/{address}/portfolio-value/senior
+  method: get
+  operationId: getSmartYieldUserSeniorPortfolioValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/pools
+  method: get
+  operationId: listSmartAlphaPools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/pools/{poolAddress}/tokens-price-chart
+  method: get
+  operationId: getSmartAlphaTokensPriceChart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/pools/{poolAddress}/pool-performance-chart
+  method: get
+  operationId: getSmartAlphaPoolPerformanceChart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/pools/{poolAddress}/previous-epochs
+  method: get
+  operationId: listSmartAlphaPreviousEpochs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/users/{address}/portfolio-value
+  method: get
+  operationId: getSmartAlphaUserPortfolioValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/users/{address}/queue-positions
+  method: get
+  operationId: getSmartAlphaUserQueuePositions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/transactions
+  method: get
+  operationId: listSmartAlphaTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/rewards/pools
+  method: get
+  operationId: listSmartAlphaRewardPools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartalpha/rewards/pools/{poolAddress}/transactions
+  method: get
+  operationId: listSmartAlphaRewardPoolTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/pools
+  method: get
+  operationId: listSmartExposurePools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/tranches
+  method: get
+  operationId: listSmartExposureTranches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/tranches/{eTokenAddress}
+  method: get
+  operationId: getSmartExposureTranche
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/tranches/{eTokenAddress}/etoken-price
+  method: get
+  operationId: getSmartExposureETokenPriceChart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/tranches/{eTokenAddress}/price-trend
+  method: get
+  operationId: getSmartExposurePriceTrend
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/tranches/{eTokenAddress}/liquidity
+  method: get
+  operationId: getSmartExposureTrancheLiquidity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/tranches/{eTokenAddress}/ratio-deviation
+  method: get
+  operationId: getSmartExposureRatioDeviation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/transactions
+  method: get
+  operationId: listSmartExposureTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/smartexposure/users/{userAddress}/portfolio-value
+  method: get
+  operationId: getSmartExposureUserPortfolioValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/proposals
+  method: get
+  operationId: listGovernanceProposals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/proposals/{proposalID}
+  method: get
+  operationId: getGovernanceProposal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/proposals/{proposalID}/votes
+  method: get
+  operationId: listGovernanceProposalVotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/proposals/{proposalID}/events
+  method: get
+  operationId: listGovernanceProposalEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/overview
+  method: get
+  operationId: getGovernanceOverview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/voters
+  method: get
+  operationId: listGovernanceVoters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/abrogation-proposals
+  method: get
+  operationId: listAbrogationProposals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/abrogation-proposals/{proposalID}
+  method: get
+  operationId: getAbrogationProposal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/abrogation-proposals/{proposalID}/votes
+  method: get
+  operationId: listAbrogationProposalVotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/treasury/transactions
+  method: get
+  operationId: listTreasuryTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/governance/treasury/tokens
+  method: get
+  operationId: listTreasuryTokens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/yieldfarming/staking-actions/list
+  method: get
+  operationId: listYieldFarmingStakingActions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/yieldfarming/staking-actions/chart
+  method: get
+  operationId: getYieldFarmingStakingActionsChart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

@@ -124,6 +124,8 @@ apis:
       - key: github-repository
         value: https://github.com/BarnBridge/internal-api
 common:
+  - type: AgenticAccess
+    url: agentic-access/barnbridge-agentic-access.yml
   - type: JSONLDContext
     url: https://raw.githubusercontent.com/api-evangelist/barnbridge/refs/heads/main/json-ld/context.jsonld
   - type: JSONSchema
