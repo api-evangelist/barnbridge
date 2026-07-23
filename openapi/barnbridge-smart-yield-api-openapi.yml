@@ -1,0 +1,436 @@
+openapi: 3.0.3
+info:
+  title: BarnBridge Governance SMART Yield API
+  description: 'BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
+
+    '
+  version: 2.0.0
+  contact:
+    name: BarnBridge Discord
+    url: https://discord.com/invite/FfEhsVk
+  license:
+    name: GPL-3.0
+    url: https://github.com/BarnBridge/internal-api/blob/main/LICENSE
+  x-logo:
+    url: https://barnbridge.com/logo.png
+servers:
+- url: https://api-v2.barnbridge.com
+  description: BarnBridge Production API
+tags:
+- name: SMART Yield
+  description: Structured-product yield pools with senior/junior tranches
+paths:
+  /api/smartyield/pools:
+    get:
+      operationId: listSmartYieldPools
+      summary: List SMART Yield pools
+      tags:
+      - SMART Yield
+      description: Returns all SMART Yield structured-product pools with current liquidity, APY, and state data. Optionally filter by originator protocol or underlying token symbol.
+      parameters:
+      - name: originator
+        in: query
+        description: Comma-separated list of originator protocol IDs, or "all" (default).
+        schema:
+          type: string
+          default: all
+        example: compound/v2
+      - name: underlyingSymbol
+        in: query
+        description: Underlying asset symbol filter (case-insensitive), or "all" (default).
+        schema:
+          type: string
+          default: all
+        example: USDC
+      responses:
+        '200':
+          description: Array of SMART Yield pool objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/smartyield/pools/{address}:
+    get:
+      operationId: getSmartYieldPool
+      summary: Get SMART Yield pool by address
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/poolAddress'
+      responses:
+        '200':
+          description: Single SMART Yield pool object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/smartyield/pools/{address}/apy:
+    get:
+      operationId: getSmartYieldPoolAPYTrend
+      summary: Get APY trend for a SMART Yield pool
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/poolAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series array of APY data points
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/pools/{address}/liquidity:
+    get:
+      operationId: getSmartYieldPoolLiquidity
+      summary: Get liquidity chart for a SMART Yield pool
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/poolAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series array of liquidity data points
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/pools/{address}/transactions:
+    get:
+      operationId: listSmartYieldPoolTransactions
+      summary: List transactions for a SMART Yield pool
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/poolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of pool transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/pools/{address}/senior-bonds:
+    get:
+      operationId: listSmartYieldSeniorBonds
+      summary: List senior bonds for a SMART Yield pool
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/poolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of senior bond positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/pools/{address}/junior-bonds:
+    get:
+      operationId: listSmartYieldJuniorBonds
+      summary: List junior bonds for a SMART Yield pool
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/poolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of junior bond positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/rewards/pools:
+    get:
+      operationId: listSmartYieldRewardPools
+      summary: List SMART Yield reward pools (v1)
+      tags:
+      - SMART Yield
+      responses:
+        '200':
+          description: Array of reward pool objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/rewards/pools/{poolAddress}/transactions:
+    get:
+      operationId: listSmartYieldRewardPoolTransactions
+      summary: List staking-action transactions for a reward pool (v1)
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/rewardPoolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of staking-action transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/rewards/v2/pools:
+    get:
+      operationId: listSmartYieldRewardPoolsV2
+      summary: List SMART Yield reward pools (v2)
+      tags:
+      - SMART Yield
+      responses:
+        '200':
+          description: Array of v2 reward pool objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/rewards/v2/pools/{poolAddress}/transactions:
+    get:
+      operationId: listSmartYieldRewardPoolTransactionsV2
+      summary: List staking-action transactions for a reward pool (v2)
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/rewardPoolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of v2 staking-action transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/users/{address}/history:
+    get:
+      operationId: getSmartYieldUserHistory
+      summary: Get SMART Yield transaction history for a user
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated transaction history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/users/{address}/redeems/senior:
+    get:
+      operationId: getSmartYieldUserSeniorRedeems
+      summary: Get senior bond redeems for a user
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of senior bond redeems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/users/{address}/junior-past-positions:
+    get:
+      operationId: getSmartYieldUserJuniorPastPositions
+      summary: Get past junior positions for a user
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of past junior positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/users/{address}/portfolio-value:
+    get:
+      operationId: getSmartYieldUserPortfolioValue
+      summary: Get total portfolio value for a user
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      responses:
+        '200':
+          description: Portfolio value breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/users/{address}/portfolio-value/junior:
+    get:
+      operationId: getSmartYieldUserJuniorPortfolioValue
+      summary: Get junior portfolio value for a user
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      responses:
+        '200':
+          description: Junior portfolio value breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartyield/users/{address}/portfolio-value/senior:
+    get:
+      operationId: getSmartYieldUserSeniorPortfolioValue
+      summary: Get senior portfolio value for a user
+      tags:
+      - SMART Yield
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      responses:
+        '200':
+          description: Senior portfolio value breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
+    ErrorResponse:
+      type: object
+      description: Standard error envelope.
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: invalid pool address
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid parameter or address.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 7d
+        - 30d
+        default: 30d
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    rewardPoolAddress:
+      name: poolAddress
+      in: path
+      required: true
+      description: Ethereum address of the reward pool.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0x3FdFb07472ea4771E1aD66FD3b87b265Cd4ec112'
+    poolAddress:
+      name: address
+      in: path
+      required: true
+      description: Ethereum address of the SMART Yield pool (checksummed or lowercase).
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840'
+    userAddress:
+      name: address
+      in: path
+      required: true
+      description: Ethereum address of the user.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0xabcdef1234567890abcdef1234567890abcdef12'

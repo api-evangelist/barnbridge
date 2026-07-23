@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: BarnBridge Governance Yield Farming API
+  description: 'BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
+
+    '
+  version: 2.0.0
+  contact:
+    name: BarnBridge Discord
+    url: https://discord.com/invite/FfEhsVk
+  license:
+    name: GPL-3.0
+    url: https://github.com/BarnBridge/internal-api/blob/main/LICENSE
+  x-logo:
+    url: https://barnbridge.com/logo.png
+servers:
+- url: https://api-v2.barnbridge.com
+  description: BarnBridge Production API
+tags:
+- name: Yield Farming
+  description: Staking-actions analytics and charts
+paths:
+  /api/yieldfarming/staking-actions/list:
+    get:
+      operationId: listYieldFarmingStakingActions
+      summary: List yield farming staking actions
+      tags:
+      - Yield Farming
+      description: Returns a paginated list of staking and unstaking events across BarnBridge yield farming pools.
+      parameters:
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of staking actions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/yieldfarming/staking-actions/chart:
+    get:
+      operationId: getYieldFarmingStakingActionsChart
+      summary: Get staking actions chart data
+      tags:
+      - Yield Farming
+      description: Returns historical time-series data for charting staking and unstaking volumes.
+      parameters:
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series staking actions chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
+  parameters:
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 7d
+        - 30d
+        default: 30d
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10

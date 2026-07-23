@@ -1,0 +1,279 @@
+openapi: 3.0.3
+info:
+  title: BarnBridge Governance SMART Exposure API
+  description: 'BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
+
+    '
+  version: 2.0.0
+  contact:
+    name: BarnBridge Discord
+    url: https://discord.com/invite/FfEhsVk
+  license:
+    name: GPL-3.0
+    url: https://github.com/BarnBridge/internal-api/blob/main/LICENSE
+  x-logo:
+    url: https://barnbridge.com/logo.png
+servers:
+- url: https://api-v2.barnbridge.com
+  description: BarnBridge Production API
+tags:
+- name: SMART Exposure
+  description: Automated token-ratio rebalancing tranches
+paths:
+  /api/smartexposure/pools:
+    get:
+      operationId: listSmartExposurePools
+      summary: List SMART Exposure pools
+      tags:
+      - SMART Exposure
+      description: Returns all SMART Exposure token-pair pools with their current state.
+      responses:
+        '200':
+          description: Array of SMART Exposure pool objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/tranches:
+    get:
+      operationId: listSmartExposureTranches
+      summary: List all SMART Exposure tranches
+      tags:
+      - SMART Exposure
+      parameters:
+      - name: poolAddress
+        in: query
+        description: Filter tranches by pool address.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Array of tranche objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/tranches/{eTokenAddress}:
+    get:
+      operationId: getSmartExposureTranche
+      summary: Get details for a SMART Exposure tranche
+      tags:
+      - SMART Exposure
+      parameters:
+      - $ref: '#/components/parameters/eTokenAddress'
+      responses:
+        '200':
+          description: Single tranche object with state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/smartexposure/tranches/{eTokenAddress}/etoken-price:
+    get:
+      operationId: getSmartExposureETokenPriceChart
+      summary: Get eToken price chart for a tranche
+      tags:
+      - SMART Exposure
+      parameters:
+      - $ref: '#/components/parameters/eTokenAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series eToken price data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/tranches/{eTokenAddress}/price-trend:
+    get:
+      operationId: getSmartExposurePriceTrend
+      summary: Get underlying token price trend for a tranche
+      tags:
+      - SMART Exposure
+      parameters:
+      - $ref: '#/components/parameters/eTokenAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series underlying-token price trend data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/tranches/{eTokenAddress}/liquidity:
+    get:
+      operationId: getSmartExposureTrancheLiquidity
+      summary: Get liquidity chart for a SMART Exposure tranche
+      tags:
+      - SMART Exposure
+      parameters:
+      - $ref: '#/components/parameters/eTokenAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series liquidity chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/tranches/{eTokenAddress}/ratio-deviation:
+    get:
+      operationId: getSmartExposureRatioDeviation
+      summary: Get ratio deviation chart for a SMART Exposure tranche
+      tags:
+      - SMART Exposure
+      parameters:
+      - $ref: '#/components/parameters/eTokenAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series ratio-deviation chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/transactions:
+    get:
+      operationId: listSmartExposureTransactions
+      summary: List SMART Exposure transactions
+      tags:
+      - SMART Exposure
+      parameters:
+      - name: eTokenAddress
+        in: query
+        description: Filter by eToken address.
+        schema:
+          type: string
+      - name: userAddress
+        in: query
+        description: Filter by user address.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of SMART Exposure transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartexposure/users/{userAddress}/portfolio-value:
+    get:
+      operationId: getSmartExposureUserPortfolioValue
+      summary: Get portfolio value chart for a user in SMART Exposure
+      tags:
+      - SMART Exposure
+      parameters:
+      - name: userAddress
+        in: path
+        required: true
+        description: Ethereum address of the user.
+        schema:
+          type: string
+        example: '0xabcdef1234567890abcdef1234567890abcdef12'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series portfolio value chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
+    ErrorResponse:
+      type: object
+      description: Standard error envelope.
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: invalid pool address
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 7d
+        - 30d
+        default: 30d
+    eTokenAddress:
+      name: eTokenAddress
+      in: path
+      required: true
+      description: Ethereum address of the SMART Exposure eToken.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17'
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10

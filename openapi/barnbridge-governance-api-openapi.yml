@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: BarnBridge Governance API
+  description: 'BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
+
+    '
+  version: 2.0.0
+  contact:
+    name: BarnBridge Discord
+    url: https://discord.com/invite/FfEhsVk
+  license:
+    name: GPL-3.0
+    url: https://github.com/BarnBridge/internal-api/blob/main/LICENSE
+  x-logo:
+    url: https://barnbridge.com/logo.png
+servers:
+- url: https://api-v2.barnbridge.com
+  description: BarnBridge Production API
+tags:
+- name: Governance
+  description: BarnBridge DAO proposals, voting, and treasury
+paths:
+  /api/governance/proposals:
+    get:
+      operationId: listGovernanceProposals
+      summary: List governance proposals
+      tags:
+      - Governance
+      description: Returns a paginated, filterable list of BarnBridge DAO proposals.
+      parameters:
+      - name: title
+        in: query
+        description: Partial title search (case-insensitive).
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: Filter by proposal state. Use "ACTIVE" for in-progress or "FAILED" for ended proposals.
+        schema:
+          type: string
+          enum:
+          - all
+          - WARMUP
+          - ACTIVE
+          - ACCEPTED
+          - QUEUED
+          - GRACE
+          - CANCELED
+          - FAILED
+          - ABROGATED
+          - EXPIRED
+          default: all
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of proposals with metadata count
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/proposals/{proposalID}:
+    get:
+      operationId: getGovernanceProposal
+      summary: Get governance proposal details
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/proposalID'
+      responses:
+        '200':
+          description: Full proposal details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/governance/proposals/{proposalID}/votes:
+    get:
+      operationId: listGovernanceProposalVotes
+      summary: List votes for a governance proposal
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/proposalID'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of votes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/proposals/{proposalID}/events:
+    get:
+      operationId: listGovernanceProposalEvents
+      summary: List events for a governance proposal
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/proposalID'
+      responses:
+        '200':
+          description: List of proposal lifecycle events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/overview:
+    get:
+      operationId: getGovernanceOverview
+      summary: Get governance protocol overview
+      tags:
+      - Governance
+      description: Returns aggregate statistics about BOND staking, vBOND delegation, and governance participation.
+      responses:
+        '200':
+          description: Governance overview statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/voters:
+    get:
+      operationId: listGovernanceVoters
+      summary: List governance voters
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of voter profiles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/abrogation-proposals:
+    get:
+      operationId: listAbrogationProposals
+      summary: List abrogation proposals
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of abrogation proposals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/abrogation-proposals/{proposalID}:
+    get:
+      operationId: getAbrogationProposal
+      summary: Get abrogation proposal details
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/proposalID'
+      responses:
+        '200':
+          description: Full abrogation proposal details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/governance/abrogation-proposals/{proposalID}/votes:
+    get:
+      operationId: listAbrogationProposalVotes
+      summary: List votes for an abrogation proposal
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/proposalID'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of abrogation votes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/treasury/transactions:
+    get:
+      operationId: listTreasuryTransactions
+      summary: List DAO treasury transactions
+      tags:
+      - Governance
+      parameters:
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of treasury transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/governance/treasury/tokens:
+    get:
+      operationId: listTreasuryTokens
+      summary: List tokens held in the DAO treasury
+      tags:
+      - Governance
+      responses:
+        '200':
+          description: List of treasury token balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
+    ErrorResponse:
+      type: object
+      description: Standard error envelope.
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: invalid pool address
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    proposalID:
+      name: proposalID
+      in: path
+      required: true
+      description: Integer identifier of the governance or abrogation proposal.
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+      example: 42

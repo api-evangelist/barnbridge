@@ -1,0 +1,279 @@
+openapi: 3.0.3
+info:
+  title: BarnBridge Governance SMART Alpha API
+  description: 'BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
+
+    '
+  version: 2.0.0
+  contact:
+    name: BarnBridge Discord
+    url: https://discord.com/invite/FfEhsVk
+  license:
+    name: GPL-3.0
+    url: https://github.com/BarnBridge/internal-api/blob/main/LICENSE
+  x-logo:
+    url: https://barnbridge.com/logo.png
+servers:
+- url: https://api-v2.barnbridge.com
+  description: BarnBridge Production API
+tags:
+- name: SMART Alpha
+  description: Price-volatility pools with upside exposure and downside protection
+paths:
+  /api/smartalpha/pools:
+    get:
+      operationId: listSmartAlphaPools
+      summary: List SMART Alpha pools
+      tags:
+      - SMART Alpha
+      description: Returns all SMART Alpha price-volatility pools with current epoch state and TVL data.
+      parameters:
+      - name: userAddress
+        in: query
+        description: Ethereum address of the user; when provided, `userHasActivePosition` is populated.
+        schema:
+          type: string
+        example: '0xabcdef1234567890abcdef1234567890abcdef12'
+      responses:
+        '200':
+          description: Array of SMART Alpha pool objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/pools/{poolAddress}/tokens-price-chart:
+    get:
+      operationId: getSmartAlphaTokensPriceChart
+      summary: Get token price chart for a SMART Alpha pool
+      tags:
+      - SMART Alpha
+      parameters:
+      - $ref: '#/components/parameters/saPoolAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series token price chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/pools/{poolAddress}/pool-performance-chart:
+    get:
+      operationId: getSmartAlphaPoolPerformanceChart
+      summary: Get performance chart for a SMART Alpha pool
+      tags:
+      - SMART Alpha
+      parameters:
+      - $ref: '#/components/parameters/saPoolAddress'
+      - $ref: '#/components/parameters/windowParam'
+      responses:
+        '200':
+          description: Time-series pool performance chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/pools/{poolAddress}/previous-epochs:
+    get:
+      operationId: listSmartAlphaPreviousEpochs
+      summary: List previous epochs for a SMART Alpha pool
+      tags:
+      - SMART Alpha
+      parameters:
+      - $ref: '#/components/parameters/saPoolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of previous epoch data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/users/{address}/portfolio-value:
+    get:
+      operationId: getSmartAlphaUserPortfolioValue
+      summary: Get SMART Alpha portfolio value for a user
+      tags:
+      - SMART Alpha
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      responses:
+        '200':
+          description: User portfolio value across all SMART Alpha pools
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/users/{address}/queue-positions:
+    get:
+      operationId: getSmartAlphaUserQueuePositions
+      summary: Get queue positions for a user in SMART Alpha
+      tags:
+      - SMART Alpha
+      parameters:
+      - $ref: '#/components/parameters/userAddress'
+      responses:
+        '200':
+          description: List of user queue positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/transactions:
+    get:
+      operationId: listSmartAlphaTransactions
+      summary: List SMART Alpha transactions
+      tags:
+      - SMART Alpha
+      parameters:
+      - name: poolAddress
+        in: query
+        description: Filter by pool address.
+        schema:
+          type: string
+      - name: userAddress
+        in: query
+        description: Filter by user address.
+        schema:
+          type: string
+      - name: transactionType
+        in: query
+        description: Filter by transaction type.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of SMART Alpha transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/rewards/pools:
+    get:
+      operationId: listSmartAlphaRewardPools
+      summary: List SMART Alpha reward pools
+      tags:
+      - SMART Alpha
+      responses:
+        '200':
+          description: Array of SMART Alpha reward pools
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/smartalpha/rewards/pools/{poolAddress}/transactions:
+    get:
+      operationId: listSmartAlphaRewardPoolTransactions
+      summary: List transactions for a SMART Alpha reward pool
+      tags:
+      - SMART Alpha
+      parameters:
+      - $ref: '#/components/parameters/rewardPoolAddress'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Paginated list of reward pool transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
+  parameters:
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 7d
+        - 30d
+        default: 30d
+    saPoolAddress:
+      name: poolAddress
+      in: path
+      required: true
+      description: Ethereum address of the SMART Alpha pool.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0xcC9EE9B9A96A0e311E1Df0bF957E11e3B2ff8EB3'
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    rewardPoolAddress:
+      name: poolAddress
+      in: path
+      required: true
+      description: Ethereum address of the reward pool.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0x3FdFb07472ea4771E1aD66FD3b87b265Cd4ec112'
+    userAddress:
+      name: address
+      in: path
+      required: true
+      description: Ethereum address of the user.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0xabcdef1234567890abcdef1234567890abcdef12'
