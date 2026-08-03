@@ -1,0 +1,22 @@
+{
+  "provider": "barnbridge",
+  "sources": [
+    "barnbridge-governance-api-openapi.yml",
+    "barnbridge-smart-alpha-api-openapi.yml",
+    "barnbridge-smart-exposure-api-openapi.yml",
+    "barnbridge-smart-yield-api-openapi.yml",
+    "barnbridge-yield-farming-api-openapi.yml"
+  ],
+  "outputs": [
+    "barnbridge-governance-api-openapi.yml",
+    "barnbridge-smart-alpha-api-openapi.yml",
+    "barnbridge-smart-exposure-api-openapi.yml",
+    "barnbridge-smart-yield-api-openapi.yml",
+    "barnbridge-yield-farming-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,1382 @@
+openapi: 3.0.3
+info:
+  title: BarnBridge API
+  description: >
+    BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints
+    for querying SMART Yield structured products, SMART Alpha price-volatility pools,
+    SMART Exposure automated-rebalancing tranches, DAO Governance proposals and
+    treasury data, and Yield Farming staking analytics.
+  version: "2.0.0"
+  contact:
+    name: BarnBridge Discord
+    url: https://discord.com/invite/FfEhsVk
+  license:
+    name: GPL-3.0
+    url: https://github.com/BarnBridge/internal-api/blob/main/LICENSE
+  x-logo:
+    url: https://barnbridge.com/logo.png
+
+servers:
+  - url: https://api-v2.barnbridge.com
+    description: BarnBridge Production API
+
+tags:
+  - name: SMART Yield
+    description: Structured-product yield pools with senior/junior tranches
+  - name: SMART Alpha
+    description: Price-volatility pools with upside exposure and downside protection
+  - name: SMART Exposure
+    description: Automated token-ratio rebalancing tranches
+  - name: Governance
+    description: BarnBridge DAO proposals, voting, and treasury
+  - name: Yield Farming
+    description: Staking-actions analytics and charts
+
+paths:
+
+  # ──────────────── SMART YIELD ────────────────
+
+  /api/smartyield/pools:
+    get:
+      operationId: listSmartYieldPools
+      summary: List SMART Yield pools
+      tags: [SMART Yield]
+      description: Returns all SMART Yield structured-product pools with current liquidity, APY, and state data. Optionally filter by originator protocol or underlying token symbol.
+      parameters:
+        - name: originator
+          in: query
+          description: Comma-separated list of originator protocol IDs, or "all" (default).
+          schema:
+            type: string
+            default: all
+          example: compound/v2
+        - name: underlyingSymbol
+          in: query
+          description: Underlying asset symbol filter (case-insensitive), or "all" (default).
+          schema:
+            type: string
+            default: all
+          example: USDC
+      responses:
+        "200":
+          description: Array of SMART Yield pool objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /api/smartyield/pools/{address}:
+    get:
+      operationId: getSmartYieldPool
+      summary: Get SMART Yield pool by address
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/poolAddress"
+      responses:
+        "200":
+          description: Single SMART Yield pool object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/smartyield/pools/{address}/apy:
+    get:
+      operationId: getSmartYieldPoolAPYTrend
+      summary: Get APY trend for a SMART Yield pool
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/poolAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series array of APY data points
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/pools/{address}/liquidity:
+    get:
+      operationId: getSmartYieldPoolLiquidity
+      summary: Get liquidity chart for a SMART Yield pool
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/poolAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series array of liquidity data points
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/pools/{address}/transactions:
+    get:
+      operationId: listSmartYieldPoolTransactions
+      summary: List transactions for a SMART Yield pool
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/poolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of pool transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/pools/{address}/senior-bonds:
+    get:
+      operationId: listSmartYieldSeniorBonds
+      summary: List senior bonds for a SMART Yield pool
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/poolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of senior bond positions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/pools/{address}/junior-bonds:
+    get:
+      operationId: listSmartYieldJuniorBonds
+      summary: List junior bonds for a SMART Yield pool
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/poolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of junior bond positions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/rewards/pools:
+    get:
+      operationId: listSmartYieldRewardPools
+      summary: List SMART Yield reward pools (v1)
+      tags: [SMART Yield]
+      responses:
+        "200":
+          description: Array of reward pool objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/rewards/pools/{poolAddress}/transactions:
+    get:
+      operationId: listSmartYieldRewardPoolTransactions
+      summary: List staking-action transactions for a reward pool (v1)
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/rewardPoolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of staking-action transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/rewards/v2/pools:
+    get:
+      operationId: listSmartYieldRewardPoolsV2
+      summary: List SMART Yield reward pools (v2)
+      tags: [SMART Yield]
+      responses:
+        "200":
+          description: Array of v2 reward pool objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/rewards/v2/pools/{poolAddress}/transactions:
+    get:
+      operationId: listSmartYieldRewardPoolTransactionsV2
+      summary: List staking-action transactions for a reward pool (v2)
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/rewardPoolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of v2 staking-action transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/users/{address}/history:
+    get:
+      operationId: getSmartYieldUserHistory
+      summary: Get SMART Yield transaction history for a user
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated transaction history
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/users/{address}/redeems/senior:
+    get:
+      operationId: getSmartYieldUserSeniorRedeems
+      summary: Get senior bond redeems for a user
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of senior bond redeems
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/users/{address}/junior-past-positions:
+    get:
+      operationId: getSmartYieldUserJuniorPastPositions
+      summary: Get past junior positions for a user
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of past junior positions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/users/{address}/portfolio-value:
+    get:
+      operationId: getSmartYieldUserPortfolioValue
+      summary: Get total portfolio value for a user
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+      responses:
+        "200":
+          description: Portfolio value breakdown
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/users/{address}/portfolio-value/junior:
+    get:
+      operationId: getSmartYieldUserJuniorPortfolioValue
+      summary: Get junior portfolio value for a user
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+      responses:
+        "200":
+          description: Junior portfolio value breakdown
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartyield/users/{address}/portfolio-value/senior:
+    get:
+      operationId: getSmartYieldUserSeniorPortfolioValue
+      summary: Get senior portfolio value for a user
+      tags: [SMART Yield]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+      responses:
+        "200":
+          description: Senior portfolio value breakdown
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ──────────────── SMART ALPHA ────────────────
+
+  /api/smartalpha/pools:
+    get:
+      operationId: listSmartAlphaPools
+      summary: List SMART Alpha pools
+      tags: [SMART Alpha]
+      description: Returns all SMART Alpha price-volatility pools with current epoch state and TVL data.
+      parameters:
+        - name: userAddress
+          in: query
+          description: Ethereum address of the user; when provided, `userHasActivePosition` is populated.
+          schema:
+            type: string
+          example: "0xabcdef1234567890abcdef1234567890abcdef12"
+      responses:
+        "200":
+          description: Array of SMART Alpha pool objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/pools/{poolAddress}/tokens-price-chart:
+    get:
+      operationId: getSmartAlphaTokensPriceChart
+      summary: Get token price chart for a SMART Alpha pool
+      tags: [SMART Alpha]
+      parameters:
+        - $ref: "#/components/parameters/saPoolAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series token price chart data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/pools/{poolAddress}/pool-performance-chart:
+    get:
+      operationId: getSmartAlphaPoolPerformanceChart
+      summary: Get performance chart for a SMART Alpha pool
+      tags: [SMART Alpha]
+      parameters:
+        - $ref: "#/components/parameters/saPoolAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series pool performance chart data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/pools/{poolAddress}/previous-epochs:
+    get:
+      operationId: listSmartAlphaPreviousEpochs
+      summary: List previous epochs for a SMART Alpha pool
+      tags: [SMART Alpha]
+      parameters:
+        - $ref: "#/components/parameters/saPoolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of previous epoch data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/users/{address}/portfolio-value:
+    get:
+      operationId: getSmartAlphaUserPortfolioValue
+      summary: Get SMART Alpha portfolio value for a user
+      tags: [SMART Alpha]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+      responses:
+        "200":
+          description: User portfolio value across all SMART Alpha pools
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/users/{address}/queue-positions:
+    get:
+      operationId: getSmartAlphaUserQueuePositions
+      summary: Get queue positions for a user in SMART Alpha
+      tags: [SMART Alpha]
+      parameters:
+        - $ref: "#/components/parameters/userAddress"
+      responses:
+        "200":
+          description: List of user queue positions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/transactions:
+    get:
+      operationId: listSmartAlphaTransactions
+      summary: List SMART Alpha transactions
+      tags: [SMART Alpha]
+      parameters:
+        - name: poolAddress
+          in: query
+          description: Filter by pool address.
+          schema:
+            type: string
+        - name: userAddress
+          in: query
+          description: Filter by user address.
+          schema:
+            type: string
+        - name: transactionType
+          in: query
+          description: Filter by transaction type.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of SMART Alpha transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/rewards/pools:
+    get:
+      operationId: listSmartAlphaRewardPools
+      summary: List SMART Alpha reward pools
+      tags: [SMART Alpha]
+      responses:
+        "200":
+          description: Array of SMART Alpha reward pools
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartalpha/rewards/pools/{poolAddress}/transactions:
+    get:
+      operationId: listSmartAlphaRewardPoolTransactions
+      summary: List transactions for a SMART Alpha reward pool
+      tags: [SMART Alpha]
+      parameters:
+        - $ref: "#/components/parameters/rewardPoolAddress"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of reward pool transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ──────────────── SMART EXPOSURE ────────────────
+
+  /api/smartexposure/pools:
+    get:
+      operationId: listSmartExposurePools
+      summary: List SMART Exposure pools
+      tags: [SMART Exposure]
+      description: Returns all SMART Exposure token-pair pools with their current state.
+      responses:
+        "200":
+          description: Array of SMART Exposure pool objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/tranches:
+    get:
+      operationId: listSmartExposureTranches
+      summary: List all SMART Exposure tranches
+      tags: [SMART Exposure]
+      parameters:
+        - name: poolAddress
+          in: query
+          description: Filter tranches by pool address.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Array of tranche objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/tranches/{eTokenAddress}:
+    get:
+      operationId: getSmartExposureTranche
+      summary: Get details for a SMART Exposure tranche
+      tags: [SMART Exposure]
+      parameters:
+        - $ref: "#/components/parameters/eTokenAddress"
+      responses:
+        "200":
+          description: Single tranche object with state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/smartexposure/tranches/{eTokenAddress}/etoken-price:
+    get:
+      operationId: getSmartExposureETokenPriceChart
+      summary: Get eToken price chart for a tranche
+      tags: [SMART Exposure]
+      parameters:
+        - $ref: "#/components/parameters/eTokenAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series eToken price data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/tranches/{eTokenAddress}/price-trend:
+    get:
+      operationId: getSmartExposurePriceTrend
+      summary: Get underlying token price trend for a tranche
+      tags: [SMART Exposure]
+      parameters:
+        - $ref: "#/components/parameters/eTokenAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series underlying-token price trend data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/tranches/{eTokenAddress}/liquidity:
+    get:
+      operationId: getSmartExposureTrancheLiquidity
+      summary: Get liquidity chart for a SMART Exposure tranche
+      tags: [SMART Exposure]
+      parameters:
+        - $ref: "#/components/parameters/eTokenAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series liquidity chart data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/tranches/{eTokenAddress}/ratio-deviation:
+    get:
+      operationId: getSmartExposureRatioDeviation
+      summary: Get ratio deviation chart for a SMART Exposure tranche
+      tags: [SMART Exposure]
+      parameters:
+        - $ref: "#/components/parameters/eTokenAddress"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series ratio-deviation chart data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/transactions:
+    get:
+      operationId: listSmartExposureTransactions
+      summary: List SMART Exposure transactions
+      tags: [SMART Exposure]
+      parameters:
+        - name: eTokenAddress
+          in: query
+          description: Filter by eToken address.
+          schema:
+            type: string
+        - name: userAddress
+          in: query
+          description: Filter by user address.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of SMART Exposure transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/smartexposure/users/{userAddress}/portfolio-value:
+    get:
+      operationId: getSmartExposureUserPortfolioValue
+      summary: Get portfolio value chart for a user in SMART Exposure
+      tags: [SMART Exposure]
+      parameters:
+        - name: userAddress
+          in: path
+          required: true
+          description: Ethereum address of the user.
+          schema:
+            type: string
+          example: "0xabcdef1234567890abcdef1234567890abcdef12"
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series portfolio value chart data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ──────────────── GOVERNANCE ────────────────
+
+  /api/governance/proposals:
+    get:
+      operationId: listGovernanceProposals
+      summary: List governance proposals
+      tags: [Governance]
+      description: Returns a paginated, filterable list of BarnBridge DAO proposals.
+      parameters:
+        - name: title
+          in: query
+          description: Partial title search (case-insensitive).
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: Filter by proposal state. Use "ACTIVE" for in-progress or "FAILED" for ended proposals.
+          schema:
+            type: string
+            enum: [all, WARMUP, ACTIVE, ACCEPTED, QUEUED, GRACE, CANCELED, FAILED, ABROGATED, EXPIRED]
+            default: all
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of proposals with metadata count
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/proposals/{proposalID}:
+    get:
+      operationId: getGovernanceProposal
+      summary: Get governance proposal details
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/proposalID"
+      responses:
+        "200":
+          description: Full proposal details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/governance/proposals/{proposalID}/votes:
+    get:
+      operationId: listGovernanceProposalVotes
+      summary: List votes for a governance proposal
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/proposalID"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of votes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/proposals/{proposalID}/events:
+    get:
+      operationId: listGovernanceProposalEvents
+      summary: List events for a governance proposal
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/proposalID"
+      responses:
+        "200":
+          description: List of proposal lifecycle events
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/overview:
+    get:
+      operationId: getGovernanceOverview
+      summary: Get governance protocol overview
+      tags: [Governance]
+      description: Returns aggregate statistics about BOND staking, vBOND delegation, and governance participation.
+      responses:
+        "200":
+          description: Governance overview statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/voters:
+    get:
+      operationId: listGovernanceVoters
+      summary: List governance voters
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of voter profiles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/abrogation-proposals:
+    get:
+      operationId: listAbrogationProposals
+      summary: List abrogation proposals
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of abrogation proposals
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/abrogation-proposals/{proposalID}:
+    get:
+      operationId: getAbrogationProposal
+      summary: Get abrogation proposal details
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/proposalID"
+      responses:
+        "200":
+          description: Full abrogation proposal details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/governance/abrogation-proposals/{proposalID}/votes:
+    get:
+      operationId: listAbrogationProposalVotes
+      summary: List votes for an abrogation proposal
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/proposalID"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of abrogation votes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/treasury/transactions:
+    get:
+      operationId: listTreasuryTransactions
+      summary: List DAO treasury transactions
+      tags: [Governance]
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of treasury transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/governance/treasury/tokens:
+    get:
+      operationId: listTreasuryTokens
+      summary: List tokens held in the DAO treasury
+      tags: [Governance]
+      responses:
+        "200":
+          description: List of treasury token balances
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ──────────────── YIELD FARMING ────────────────
+
+  /api/yieldfarming/staking-actions/list:
+    get:
+      operationId: listYieldFarmingStakingActions
+      summary: List yield farming staking actions
+      tags: [Yield Farming]
+      description: Returns a paginated list of staking and unstaking events across BarnBridge yield farming pools.
+      parameters:
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+      responses:
+        "200":
+          description: Paginated list of staking actions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /api/yieldfarming/staking-actions/chart:
+    get:
+      operationId: getYieldFarmingStakingActionsChart
+      summary: Get staking actions chart data
+      tags: [Yield Farming]
+      description: Returns historical time-series data for charting staking and unstaking volumes.
+      parameters:
+        - $ref: "#/components/parameters/windowParam"
+      responses:
+        "200":
+          description: Time-series staking actions chart data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+components:
+
+  parameters:
+
+    poolAddress:
+      name: address
+      in: path
+      required: true
+      description: Ethereum address of the SMART Yield pool (checksummed or lowercase).
+      schema:
+        type: string
+        pattern: "^0x[0-9a-fA-F]{40}$"
+      example: "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840"
+
+    saPoolAddress:
+      name: poolAddress
+      in: path
+      required: true
+      description: Ethereum address of the SMART Alpha pool.
+      schema:
+        type: string
+        pattern: "^0x[0-9a-fA-F]{40}$"
+      example: "0xcC9EE9B9A96A0e311E1Df0bF957E11e3B2ff8EB3"
+
+    rewardPoolAddress:
+      name: poolAddress
+      in: path
+      required: true
+      description: Ethereum address of the reward pool.
+      schema:
+        type: string
+        pattern: "^0x[0-9a-fA-F]{40}$"
+      example: "0x3FdFb07472ea4771E1aD66FD3b87b265Cd4ec112"
+
+    eTokenAddress:
+      name: eTokenAddress
+      in: path
+      required: true
+      description: Ethereum address of the SMART Exposure eToken.
+      schema:
+        type: string
+        pattern: "^0x[0-9a-fA-F]{40}$"
+      example: "0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17"
+
+    userAddress:
+      name: address
+      in: path
+      required: true
+      description: Ethereum address of the user.
+      schema:
+        type: string
+        pattern: "^0x[0-9a-fA-F]{40}$"
+      example: "0xabcdef1234567890abcdef1234567890abcdef12"
+
+    proposalID:
+      name: proposalID
+      in: path
+      required: true
+      description: Integer identifier of the governance or abrogation proposal.
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+      example: 42
+
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum: ["24h", "7d", "30d"]
+        default: "30d"
+
+  schemas:
+
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+            - type: array
+              items: {}
+            - type: object
+        meta:
+          $ref: "#/components/schemas/Meta"
+
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: "#/components/schemas/BlockInfo"
+
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
+
+    ErrorResponse:
+      type: object
+      description: Standard error envelope.
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: "invalid pool address"
+
+    SmartYieldPool:
+      type: object
+      description: A SMART Yield structured-product pool.
+      properties:
+        protocolId:
+          type: string
+          example: "compound/v2"
+        smartYieldAddress:
+          type: string
+          example: "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840"
+        controllerAddress:
+          type: string
+        modelAddress:
+          type: string
+        providerAddress:
+          type: string
+        oracleAddress:
+          type: string
+        juniorBondAddress:
+          type: string
+        seniorBondAddress:
+          type: string
+        cTokenAddress:
+          type: string
+        underlyingAddress:
+          type: string
+        underlyingSymbol:
+          type: string
+          example: "USDC"
+        underlyingDecimals:
+          type: integer
+          example: 6
+        rewardPoolAddress:
+          type: string
+        state:
+          $ref: "#/components/schemas/SmartYieldPoolState"
+
+    SmartYieldPoolState:
+      type: object
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+        blockTimestamp:
+          type: string
+          format: date-time
+        seniorLiquidity:
+          type: string
+          description: Decimal string value of senior liquidity in underlying token.
+          example: "1250000.123456"
+        juniorLiquidity:
+          type: string
+          description: Decimal string value of junior liquidity in underlying token.
+        jTokenPrice:
+          type: string
+          description: Price of 1 jToken in underlying token (18 decimals normalized).
+        seniorApy:
+          type: number
+          format: double
+        juniorApy:
+          type: number
+          format: double
+        juniorAPYPast30DAvg:
+          type: number
+          format: double
+        originatorApy:
+          type: number
+          format: double
+        originatorNetApy:
+          type: number
+          format: double
+        avgSeniorMaturityDays:
+          type: number
+          format: double
+        numberOfSeniors:
+          type: integer
+          format: int64
+        numberOfJuniors:
+          type: integer
+          format: int64
+        numberOfJuniorsLocked:
+          type: integer
+          format: int64
+        juniorLiquidityLocked:
+          type: string
+
+    SmartAlphaPool:
+      type: object
+      description: A SMART Alpha price-volatility pool.
+      properties:
+        poolName:
+          type: string
+          example: "WBTC-USD"
+        poolAddress:
+          type: string
+        poolToken:
+          $ref: "#/components/schemas/Token"
+        juniorTokenAddress:
+          type: string
+        seniorTokenAddress:
+          type: string
+        oracleAddress:
+          type: string
+        oracleAssetSymbol:
+          type: string
+          example: "BTC/USD"
+        seniorRateModelAddress:
+          type: string
+        accountingModelAddress:
+          type: string
+        epoch1Start:
+          type: integer
+          format: int64
+        epochDuration:
+          type: integer
+          format: int64
+        state:
+          $ref: "#/components/schemas/SmartAlphaPoolState"
+        tvl:
+          $ref: "#/components/schemas/SmartAlphaPoolTVL"
+
+    SmartAlphaPoolState:
+      type: object
+      properties:
+        epoch:
+          type: integer
+          format: int64
+        seniorLiquidity:
+          type: string
+        juniorLiquidity:
+          type: string
+        upsideExposureRate:
+          type: string
+        downsideProtectionRate:
+          type: string
+
+    SmartAlphaPoolTVL:
+      type: object
+      properties:
+        epochJuniorTVL:
+          type: number
+          format: double
+        epochSeniorTVL:
+          type: number
+          format: double
+        juniorEntryQueueTVL:
+          type: number
+          format: double
+        seniorEntryQueueTVL:
+          type: number
+          format: double
+        juniorExitQueueTVL:
+          type: number
+          format: double
+        seniorExitQueueTVL:
+          type: number
+          format: double
+        juniorExitedTVL:
+          type: number
+          format: double
+        seniorExitedTVL:
+          type: number
+          format: double
+
+    SmartExposurePool:
+      type: object
+      description: A SMART Exposure automated-rebalancing pool.
+      properties:
+        poolAddress:
+          type: string
+        poolName:
+          type: string
+        tokenA:
+          $ref: "#/components/schemas/Token"
+        tokenB:
+          $ref: "#/components/schemas/Token"
+
+    SmartExposureTranche:
+      type: object
+      description: A SMART Exposure eToken tranche.
+      properties:
+        poolAddress:
+          type: string
+        eTokenAddress:
+          type: string
+        eTokenSymbol:
+          type: string
+        sFactorE:
+          type: string
+        targetRatio:
+          type: string
+        tokenARatio:
+          type: string
+        tokenBRatio:
+          type: string
+        tokenA:
+          $ref: "#/components/schemas/Token"
+        tokenB:
+          $ref: "#/components/schemas/Token"
+        rebalancingInterval:
+          type: integer
+          format: int64
+        rebalancingCondition:
+          type: string
+
+    GovernanceProposal:
+      type: object
+      description: A BarnBridge DAO governance proposal.
+      properties:
+        proposalId:
+          type: integer
+          format: int64
+        proposer:
+          type: string
+        description:
+          type: string
+        title:
+          type: string
+        createTime:
+          type: integer
+          format: int64
+        state:
+          type: string
+          example: "ACTIVE"
+        stateTimeLeft:
+          type: integer
+          format: int64
+          nullable: true
+        forVotes:
+          type: string
+        againstVotes:
+          type: string
+
+    GovernanceOverview:
+      type: object
+      properties:
+        avgLockTimeSeconds:
+          type: integer
+          format: int64
+        holders:
+          type: integer
+          format: int64
+        totalDelegatedPower:
+          type: string
+        totalVbond:
+          type: string
+        voters:
+          type: integer
+          format: int64
+        barnUsers:
+          type: integer
+          format: int64
+        holdersStakingExcluded:
+          type: integer
+          format: int64
+
+    Vote:
+      type: object
+      properties:
+        address:
+          type: string
+        support:
+          type: boolean
+        blockTimestamp:
+          type: integer
+          format: int64
+        power:
+          type: string
+
+    Voter:
+      type: object
+      properties:
+        address:
+          type: string
+        bondStaked:
+          type: string
+        lockedUntil:
+          type: integer
+          format: int64
+        delegatedPower:
+          type: string
+        votes:
+          type: integer
+          format: int64
+        proposals:
+          type: integer
+          format: int64
+        votingPower:
+          type: string
+        hasActiveDelegation:
+          type: boolean
+
+    TreasuryTx:
+      type: object
+      properties:
+        accountAddress:
+          type: string
+        accountLabel:
+          type: string
+        counterpartyAddress:
+          type: string
+        counterpartyLabel:
+          type: string
+        amount:
+          type: string
+        transactionDirection:
+          type: string
+          enum: [IN, OUT]
+        tokenAddress:
+          type: string
+        tokenSymbol:
+          type: string
+        tokenDecimals:
+          type: integer
+          format: int64
+        transactionHash:
+          type: string
+        blockTimestamp:
+          type: integer
+          format: int64
+        blockNumber:
+          type: integer
+          format: int64
+
+    Token:
+      type: object
+      description: ERC-20 token metadata.
+      properties:
+        address:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: integer
+
+  responses:
+
+    BadRequest:
+      description: Invalid parameter or address.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
