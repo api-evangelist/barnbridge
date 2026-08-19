@@ -1,0 +1,1163 @@
+{
+  "item": [
+    {
+      "id": "ee90afa7-4c4b-465f-9b29-b148ce5c9eaa",
+      "name": "Governance",
+      "description": {
+        "content": "BarnBridge DAO proposals, voting, and treasury",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dcab243d-fb19-4952-9126-41ddb1466c75",
+          "name": "List governance proposals",
+          "request": {
+            "name": "List governance proposals",
+            "description": {
+              "content": "Returns a paginated, filterable list of BarnBridge DAO proposals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "proposals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Partial title search (case-insensitive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "all",
+                  "description": "Filter by proposal state. Use \"ACTIVE\" for in-progress or \"FAILED\" for ended proposals."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3686fd7a-6ac0-493d-a620-862df400d80f",
+              "name": "Paginated list of proposals with metadata count",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "proposals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "871fb880-cb09-47a4-b5af-ca98a6876784",
+          "name": "Get governance proposal details",
+          "request": {
+            "name": "Get governance proposal details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "proposals",
+                ":proposalID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "proposalID",
+                  "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04b99fcd-7a64-4e8e-92d2-fc28d32d7d38",
+              "name": "Full proposal details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "proposals",
+                    ":proposalID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea2086ed-b3bf-4450-9fbe-ee62ffcb297c",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "proposals",
+                    ":proposalID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"invalid pool address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c769738-7161-4130-b90e-f2f106a68b02",
+          "name": "List votes for a governance proposal",
+          "request": {
+            "name": "List votes for a governance proposal",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "proposals",
+                ":proposalID",
+                "votes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "proposalID",
+                  "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a6286e8-dbfd-4394-acfc-56dd82afe552",
+              "name": "Paginated list of votes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "proposals",
+                    ":proposalID",
+                    "votes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d66b28a4-bb16-4dc3-b7b0-8f89beea0b5a",
+          "name": "List events for a governance proposal",
+          "request": {
+            "name": "List events for a governance proposal",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "proposals",
+                ":proposalID",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "proposalID",
+                  "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71af8b40-ac9a-409f-a8ed-4e2038450bbd",
+              "name": "List of proposal lifecycle events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "proposals",
+                    ":proposalID",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d01d7c7-0d1c-423d-9e5b-825515bae29f",
+          "name": "Get governance protocol overview",
+          "request": {
+            "name": "Get governance protocol overview",
+            "description": {
+              "content": "Returns aggregate statistics about BOND staking, vBOND delegation, and governance participation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6e3060e-705d-4d7b-a1c6-ba09c8bc1d45",
+              "name": "Governance overview statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56833500-7a9d-49ee-9871-9dedda2316aa",
+          "name": "List governance voters",
+          "request": {
+            "name": "List governance voters",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "voters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bad824bf-12cc-4035-9ad5-5f8ff7b9e33e",
+              "name": "Paginated list of voter profiles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "voters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f30d7df-cb9c-451d-bbd2-0ebc6780b2bc",
+          "name": "List abrogation proposals",
+          "request": {
+            "name": "List abrogation proposals",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "abrogation-proposals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d7ed4e9-29de-4fab-b495-1f4f25c05704",
+              "name": "Paginated list of abrogation proposals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "abrogation-proposals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26c81d43-1171-4a07-908c-fc24aa355d3c",
+          "name": "Get abrogation proposal details",
+          "request": {
+            "name": "Get abrogation proposal details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "abrogation-proposals",
+                ":proposalID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "proposalID",
+                  "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcdf1511-9c78-4200-bb42-b854274b19e4",
+              "name": "Full abrogation proposal details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "abrogation-proposals",
+                    ":proposalID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7b45cdc-5841-425a-9ad7-713f74c8b1a3",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "abrogation-proposals",
+                    ":proposalID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"invalid pool address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af53da62-eaf0-4ef6-a675-c8e0304192fa",
+          "name": "List votes for an abrogation proposal",
+          "request": {
+            "name": "List votes for an abrogation proposal",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "abrogation-proposals",
+                ":proposalID",
+                "votes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "proposalID",
+                  "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffc9d578-ee5c-4c05-8470-cd1ef58f5734",
+              "name": "Paginated list of abrogation votes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "abrogation-proposals",
+                    ":proposalID",
+                    "votes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "proposalID",
+                      "description": "(Required) Integer identifier of the governance or abrogation proposal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dad9c715-c264-41ce-9750-a1e3b7d40889",
+          "name": "List DAO treasury transactions",
+          "request": {
+            "name": "List DAO treasury transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "treasury",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b761bfc7-86c1-41d9-9f8e-9eac97d5863a",
+              "name": "Paginated list of treasury transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "treasury",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "816c093b-e67e-4bba-90b9-1fc5cf536b9b",
+          "name": "List tokens held in the DAO treasury",
+          "request": {
+            "name": "List tokens held in the DAO treasury",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "governance",
+                "treasury",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbfb2c88-2880-4c4e-bc82-692910c4addf",
+              "name": "List of treasury token balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "governance",
+                    "treasury",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-v2.barnbridge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76eee952-1eca-4d17-b7b2-e07286906457",
+    "name": "BarnBridge Governance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.\n\n\nContact Support:\n Name: BarnBridge Discord",
+      "type": "text/plain"
+    }
+  }
+}

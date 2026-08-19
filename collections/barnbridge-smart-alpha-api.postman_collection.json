@@ -1,0 +1,930 @@
+{
+  "item": [
+    {
+      "id": "db158f71-9463-42a8-9d65-e32100a53c11",
+      "name": "SMART Alpha",
+      "description": {
+        "content": "Price-volatility pools with upside exposure and downside protection",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87e75e32-63f8-4f13-aa82-afbb49770965",
+          "name": "List SMART Alpha pools",
+          "request": {
+            "name": "List SMART Alpha pools",
+            "description": {
+              "content": "Returns all SMART Alpha price-volatility pools with current epoch state and TVL data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "userAddress",
+                  "value": "<string>",
+                  "description": "Ethereum address of the user; when provided, `userHasActivePosition` is populated."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d97fb2e-f786-46cc-86cc-cb8da06f3e94",
+              "name": "Array of SMART Alpha pool objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userAddress",
+                      "value": "0xabcdef1234567890abcdef1234567890abcdef12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "347fe64f-38d0-480b-8ff7-79c4b4a8cac5",
+          "name": "Get token price chart for a SMART Alpha pool",
+          "request": {
+            "name": "Get token price chart for a SMART Alpha pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "pools",
+                ":poolAddress",
+                "tokens-price-chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolAddress",
+                  "description": "(Required) Ethereum address of the SMART Alpha pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a13b803-7d9b-419a-9830-ef5f117cc652",
+              "name": "Time-series token price chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "pools",
+                    ":poolAddress",
+                    "tokens-price-chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolAddress",
+                      "description": "(Required) Ethereum address of the SMART Alpha pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e64cd04-3666-4754-877f-b944029dd3ac",
+          "name": "Get performance chart for a SMART Alpha pool",
+          "request": {
+            "name": "Get performance chart for a SMART Alpha pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "pools",
+                ":poolAddress",
+                "pool-performance-chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolAddress",
+                  "description": "(Required) Ethereum address of the SMART Alpha pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6a3cc8d-6a06-416e-916b-41b6a665cbb6",
+              "name": "Time-series pool performance chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "pools",
+                    ":poolAddress",
+                    "pool-performance-chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolAddress",
+                      "description": "(Required) Ethereum address of the SMART Alpha pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52ec2c4b-9b37-4515-919e-59f152325264",
+          "name": "List previous epochs for a SMART Alpha pool",
+          "request": {
+            "name": "List previous epochs for a SMART Alpha pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "pools",
+                ":poolAddress",
+                "previous-epochs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolAddress",
+                  "description": "(Required) Ethereum address of the SMART Alpha pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc86ba52-b735-4d31-83b9-7c9f84219c34",
+              "name": "Paginated list of previous epoch data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "pools",
+                    ":poolAddress",
+                    "previous-epochs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolAddress",
+                      "description": "(Required) Ethereum address of the SMART Alpha pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7037b4b0-26a3-4866-931d-c0d194b9452e",
+          "name": "Get SMART Alpha portfolio value for a user",
+          "request": {
+            "name": "Get SMART Alpha portfolio value for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "users",
+                ":address",
+                "portfolio-value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eaed04a9-533e-4cd1-9b6f-a53671d7921b",
+              "name": "User portfolio value across all SMART Alpha pools",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "users",
+                    ":address",
+                    "portfolio-value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8bb70ef-a31a-4c81-82a2-d8770e24e55d",
+          "name": "Get queue positions for a user in SMART Alpha",
+          "request": {
+            "name": "Get queue positions for a user in SMART Alpha",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "users",
+                ":address",
+                "queue-positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e6b35f6-a022-4cca-82c4-a486abf1a825",
+              "name": "List of user queue positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "users",
+                    ":address",
+                    "queue-positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a57cbff-c31e-4fa1-9b67-24b542654328",
+          "name": "List SMART Alpha transactions",
+          "request": {
+            "name": "List SMART Alpha transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "poolAddress",
+                  "value": "<string>",
+                  "description": "Filter by pool address."
+                },
+                {
+                  "disabled": false,
+                  "key": "userAddress",
+                  "value": "<string>",
+                  "description": "Filter by user address."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionType",
+                  "value": "<string>",
+                  "description": "Filter by transaction type."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a1bef44-519d-4b1b-96d2-c4456b20344f",
+              "name": "Paginated list of SMART Alpha transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "poolAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3c65a49-da10-438c-afab-cec667099b80",
+          "name": "List SMART Alpha reward pools",
+          "request": {
+            "name": "List SMART Alpha reward pools",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "rewards",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eeaee913-07be-412f-b8ec-c125712167e4",
+              "name": "Array of SMART Alpha reward pools",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "rewards",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7018d584-e361-48bd-8a1a-fe6b1fbf4ef2",
+          "name": "List transactions for a SMART Alpha reward pool",
+          "request": {
+            "name": "List transactions for a SMART Alpha reward pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartalpha",
+                "rewards",
+                "pools",
+                ":poolAddress",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolAddress",
+                  "description": "(Required) Ethereum address of the reward pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca35a366-87da-4f1b-ac23-f5fce5977b5e",
+              "name": "Paginated list of reward pool transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartalpha",
+                    "rewards",
+                    "pools",
+                    ":poolAddress",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolAddress",
+                      "description": "(Required) Ethereum address of the reward pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-v2.barnbridge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab04b02f-8168-4688-bdaf-1c40606cbd30",
+    "name": "BarnBridge Governance SMART Alpha API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.\n\n\nContact Support:\n Name: BarnBridge Discord",
+      "type": "text/plain"
+    }
+  }
+}

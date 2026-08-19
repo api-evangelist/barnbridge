@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BarnBridge Governance SMART Alpha API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SMART Alpha",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SMART Alpha pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/pools",
+            "params": [
+              {
+                "name": "userAddress",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "query",
+                "description": "Ethereum address of the user; when provided, `userHasActivePosition` is populated."
+              }
+            ]
+          },
+          "docs": "Returns all SMART Alpha price-volatility pools with current epoch state and TVL data."
+        },
+        {
+          "info": {
+            "name": "Get token price chart for a SMART Alpha pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/pools/:poolAddress/tokens-price-chart",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "0xcC9EE9B9A96A0e311E1Df0bF957E11e3B2ff8EB3",
+                "type": "path",
+                "description": "Ethereum address of the SMART Alpha pool."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get token price chart for a SMART Alpha pool"
+        },
+        {
+          "info": {
+            "name": "Get performance chart for a SMART Alpha pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/pools/:poolAddress/pool-performance-chart",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "0xcC9EE9B9A96A0e311E1Df0bF957E11e3B2ff8EB3",
+                "type": "path",
+                "description": "Ethereum address of the SMART Alpha pool."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get performance chart for a SMART Alpha pool"
+        },
+        {
+          "info": {
+            "name": "List previous epochs for a SMART Alpha pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/pools/:poolAddress/previous-epochs",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "0xcC9EE9B9A96A0e311E1Df0bF957E11e3B2ff8EB3",
+                "type": "path",
+                "description": "Ethereum address of the SMART Alpha pool."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List previous epochs for a SMART Alpha pool"
+        },
+        {
+          "info": {
+            "name": "Get SMART Alpha portfolio value for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/users/:address/portfolio-value",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              }
+            ]
+          },
+          "docs": "Get SMART Alpha portfolio value for a user"
+        },
+        {
+          "info": {
+            "name": "Get queue positions for a user in SMART Alpha",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/users/:address/queue-positions",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              }
+            ]
+          },
+          "docs": "Get queue positions for a user in SMART Alpha"
+        },
+        {
+          "info": {
+            "name": "List SMART Alpha transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/transactions",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "",
+                "type": "query",
+                "description": "Filter by pool address."
+              },
+              {
+                "name": "userAddress",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user address."
+              },
+              {
+                "name": "transactionType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction type."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List SMART Alpha transactions"
+        },
+        {
+          "info": {
+            "name": "List SMART Alpha reward pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/rewards/pools"
+          },
+          "docs": "List SMART Alpha reward pools"
+        },
+        {
+          "info": {
+            "name": "List transactions for a SMART Alpha reward pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartalpha/rewards/pools/:poolAddress/transactions",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "0x3FdFb07472ea4771E1aD66FD3b87b265Cd4ec112",
+                "type": "path",
+                "description": "Ethereum address of the reward pool."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List transactions for a SMART Alpha reward pool"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

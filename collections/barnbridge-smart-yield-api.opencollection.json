@@ -1,0 +1,439 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BarnBridge Governance SMART Yield API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SMART Yield",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SMART Yield pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools",
+            "params": [
+              {
+                "name": "originator",
+                "value": "compound/v2",
+                "type": "query",
+                "description": "Comma-separated list of originator protocol IDs, or \"all\" (default)."
+              },
+              {
+                "name": "underlyingSymbol",
+                "value": "USDC",
+                "type": "query",
+                "description": "Underlying asset symbol filter (case-insensitive), or \"all\" (default)."
+              }
+            ]
+          },
+          "docs": "Returns all SMART Yield structured-product pools with current liquidity, APY, and state data. Optionally filter by originator protocol or underlying token symbol."
+        },
+        {
+          "info": {
+            "name": "Get SMART Yield pool by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840",
+                "type": "path",
+                "description": "Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+              }
+            ]
+          },
+          "docs": "Get SMART Yield pool by address"
+        },
+        {
+          "info": {
+            "name": "Get APY trend for a SMART Yield pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools/:address/apy",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840",
+                "type": "path",
+                "description": "Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get APY trend for a SMART Yield pool"
+        },
+        {
+          "info": {
+            "name": "Get liquidity chart for a SMART Yield pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools/:address/liquidity",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840",
+                "type": "path",
+                "description": "Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get liquidity chart for a SMART Yield pool"
+        },
+        {
+          "info": {
+            "name": "List transactions for a SMART Yield pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools/:address/transactions",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840",
+                "type": "path",
+                "description": "Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List transactions for a SMART Yield pool"
+        },
+        {
+          "info": {
+            "name": "List senior bonds for a SMART Yield pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools/:address/senior-bonds",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840",
+                "type": "path",
+                "description": "Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List senior bonds for a SMART Yield pool"
+        },
+        {
+          "info": {
+            "name": "List junior bonds for a SMART Yield pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/pools/:address/junior-bonds",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840",
+                "type": "path",
+                "description": "Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List junior bonds for a SMART Yield pool"
+        },
+        {
+          "info": {
+            "name": "List SMART Yield reward pools (v1)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/rewards/pools"
+          },
+          "docs": "List SMART Yield reward pools (v1)"
+        },
+        {
+          "info": {
+            "name": "List staking-action transactions for a reward pool (v1)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/rewards/pools/:poolAddress/transactions",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "0x3FdFb07472ea4771E1aD66FD3b87b265Cd4ec112",
+                "type": "path",
+                "description": "Ethereum address of the reward pool."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List staking-action transactions for a reward pool (v1)"
+        },
+        {
+          "info": {
+            "name": "List SMART Yield reward pools (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/rewards/v2/pools"
+          },
+          "docs": "List SMART Yield reward pools (v2)"
+        },
+        {
+          "info": {
+            "name": "List staking-action transactions for a reward pool (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/rewards/v2/pools/:poolAddress/transactions",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "0x3FdFb07472ea4771E1aD66FD3b87b265Cd4ec112",
+                "type": "path",
+                "description": "Ethereum address of the reward pool."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List staking-action transactions for a reward pool (v2)"
+        },
+        {
+          "info": {
+            "name": "Get SMART Yield transaction history for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/users/:address/history",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "Get SMART Yield transaction history for a user"
+        },
+        {
+          "info": {
+            "name": "Get senior bond redeems for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/users/:address/redeems/senior",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "Get senior bond redeems for a user"
+        },
+        {
+          "info": {
+            "name": "Get past junior positions for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/users/:address/junior-past-positions",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "Get past junior positions for a user"
+        },
+        {
+          "info": {
+            "name": "Get total portfolio value for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/users/:address/portfolio-value",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              }
+            ]
+          },
+          "docs": "Get total portfolio value for a user"
+        },
+        {
+          "info": {
+            "name": "Get junior portfolio value for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/users/:address/portfolio-value/junior",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              }
+            ]
+          },
+          "docs": "Get junior portfolio value for a user"
+        },
+        {
+          "info": {
+            "name": "Get senior portfolio value for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartyield/users/:address/portfolio-value/senior",
+            "params": [
+              {
+                "name": "address",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              }
+            ]
+          },
+          "docs": "Get senior portfolio value for a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

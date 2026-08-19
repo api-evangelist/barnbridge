@@ -1,0 +1,1898 @@
+{
+  "item": [
+    {
+      "id": "96d8d4f9-3c13-4a2c-8293-0055f802ca3e",
+      "name": "SMART Yield",
+      "description": {
+        "content": "Structured-product yield pools with senior/junior tranches",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "90e5f8e6-6b71-4775-902e-fcaefccd1b0d",
+          "name": "List SMART Yield pools",
+          "request": {
+            "name": "List SMART Yield pools",
+            "description": {
+              "content": "Returns all SMART Yield structured-product pools with current liquidity, APY, and state data. Optionally filter by originator protocol or underlying token symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "originator",
+                  "value": "all",
+                  "description": "Comma-separated list of originator protocol IDs, or \"all\" (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "underlyingSymbol",
+                  "value": "all",
+                  "description": "Underlying asset symbol filter (case-insensitive), or \"all\" (default)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b9b341e-20ea-4ab3-8553-4e7925ef36f0",
+              "name": "Array of SMART Yield pool objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "originator",
+                      "value": "compound/v2"
+                    },
+                    {
+                      "key": "underlyingSymbol",
+                      "value": "USDC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dd690e0-6ff9-400a-8d21-b73c11e26cc3",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "originator",
+                      "value": "compound/v2"
+                    },
+                    {
+                      "key": "underlyingSymbol",
+                      "value": "USDC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"invalid pool address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cc4eebe-8ad7-4584-9bf0-962757982721",
+          "name": "Get SMART Yield pool by address",
+          "request": {
+            "name": "Get SMART Yield pool by address",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c88374e-d6e7-48f0-924b-00a43dc8fb8e",
+              "name": "Single SMART Yield pool object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac9747b6-1f5c-453a-b7a4-ef0ea4a6d002",
+              "name": "Invalid parameter or address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"invalid pool address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83c848e1-384b-4f07-b982-5ea2676136ca",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"invalid pool address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9c91d24-639a-4e1c-b33a-b05488e7df79",
+          "name": "Get APY trend for a SMART Yield pool",
+          "request": {
+            "name": "Get APY trend for a SMART Yield pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools",
+                ":address",
+                "apy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a4147dd-30d8-4f6c-9c9c-9399fdc4032c",
+              "name": "Time-series array of APY data points",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address",
+                    "apy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c34ef9d5-87a0-4030-bb28-e77dac9e0283",
+          "name": "Get liquidity chart for a SMART Yield pool",
+          "request": {
+            "name": "Get liquidity chart for a SMART Yield pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools",
+                ":address",
+                "liquidity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "573017d4-1e31-4704-b7ab-7b1085dd8372",
+              "name": "Time-series array of liquidity data points",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address",
+                    "liquidity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0e41ae8-116d-4c2f-80b2-889ed7f5e9a9",
+          "name": "List transactions for a SMART Yield pool",
+          "request": {
+            "name": "List transactions for a SMART Yield pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools",
+                ":address",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa7017a0-d8ff-45e2-9a7c-1d49f4f852ef",
+              "name": "Paginated list of pool transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0ba30e1-4364-42b4-8e76-4f981c0e1718",
+          "name": "List senior bonds for a SMART Yield pool",
+          "request": {
+            "name": "List senior bonds for a SMART Yield pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools",
+                ":address",
+                "senior-bonds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80358c1d-d428-4f3f-8dd5-990f98a3cbb7",
+              "name": "Paginated list of senior bond positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address",
+                    "senior-bonds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c6fc210-bd63-4af2-80e0-5e77e2b81350",
+          "name": "List junior bonds for a SMART Yield pool",
+          "request": {
+            "name": "List junior bonds for a SMART Yield pool",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "pools",
+                ":address",
+                "junior-bonds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ff9125c-ca31-4cbf-beb0-aa2620a407e4",
+              "name": "Paginated list of junior bond positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "pools",
+                    ":address",
+                    "junior-bonds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the SMART Yield pool (checksummed or lowercase)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbbec119-35cd-4cad-ad5f-5fe83efcbd8f",
+          "name": "List SMART Yield reward pools (v1)",
+          "request": {
+            "name": "List SMART Yield reward pools (v1)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "rewards",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "259cff03-9508-4736-93e6-ef7ea6ac1427",
+              "name": "Array of reward pool objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "rewards",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "224577ea-7b09-4423-8027-dcdb97263362",
+          "name": "List staking-action transactions for a reward pool (v1)",
+          "request": {
+            "name": "List staking-action transactions for a reward pool (v1)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "rewards",
+                "pools",
+                ":poolAddress",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolAddress",
+                  "description": "(Required) Ethereum address of the reward pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99986298-33d9-447c-99a1-55c6198c24c2",
+              "name": "Paginated list of staking-action transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "rewards",
+                    "pools",
+                    ":poolAddress",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolAddress",
+                      "description": "(Required) Ethereum address of the reward pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20cd7a9b-b5e3-4e03-9f92-d04dd3177d01",
+          "name": "List SMART Yield reward pools (v2)",
+          "request": {
+            "name": "List SMART Yield reward pools (v2)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "rewards",
+                "v2",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "884d81bd-01fd-435b-9445-6aa0942c5bbf",
+              "name": "Array of v2 reward pool objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "rewards",
+                    "v2",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "338dd92f-1309-4153-bd32-90665ad448d4",
+          "name": "List staking-action transactions for a reward pool (v2)",
+          "request": {
+            "name": "List staking-action transactions for a reward pool (v2)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "rewards",
+                "v2",
+                "pools",
+                ":poolAddress",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolAddress",
+                  "description": "(Required) Ethereum address of the reward pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e452e556-7abc-4051-bfea-e2ce58837809",
+              "name": "Paginated list of v2 staking-action transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "rewards",
+                    "v2",
+                    "pools",
+                    ":poolAddress",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolAddress",
+                      "description": "(Required) Ethereum address of the reward pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eff247d2-c532-4c1e-b63d-0ca3d8b12122",
+          "name": "Get SMART Yield transaction history for a user",
+          "request": {
+            "name": "Get SMART Yield transaction history for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "users",
+                ":address",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba8c5c39-1aa8-4432-8fcf-e30e483f995a",
+              "name": "Paginated transaction history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "users",
+                    ":address",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14b23b3c-539d-4d75-96ca-cfe8ea7b7b82",
+          "name": "Get senior bond redeems for a user",
+          "request": {
+            "name": "Get senior bond redeems for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "users",
+                ":address",
+                "redeems",
+                "senior"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b3b6c76-89ee-4a27-942c-96aba24e4492",
+              "name": "Paginated list of senior bond redeems",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "users",
+                    ":address",
+                    "redeems",
+                    "senior"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a82d6156-dbe0-480d-82be-4f9e0a9175b3",
+          "name": "Get past junior positions for a user",
+          "request": {
+            "name": "Get past junior positions for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "users",
+                ":address",
+                "junior-past-positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a91d3b2-f5b1-4a04-8c1c-7701f22b6a7b",
+              "name": "Paginated list of past junior positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "users",
+                    ":address",
+                    "junior-past-positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e9c99fa-b26d-4ef8-b5ca-f914c357d8b5",
+          "name": "Get total portfolio value for a user",
+          "request": {
+            "name": "Get total portfolio value for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "users",
+                ":address",
+                "portfolio-value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27b3bfc1-0dc7-46b9-8705-629bdf021cd5",
+              "name": "Portfolio value breakdown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "users",
+                    ":address",
+                    "portfolio-value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f4a09ea-5697-4d09-ba23-6a031c2c27d6",
+          "name": "Get junior portfolio value for a user",
+          "request": {
+            "name": "Get junior portfolio value for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "users",
+                ":address",
+                "portfolio-value",
+                "junior"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbcb32f6-f1c7-4e43-9716-be200fd3e08e",
+              "name": "Junior portfolio value breakdown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "users",
+                    ":address",
+                    "portfolio-value",
+                    "junior"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5f2cd97-c0e6-4198-8469-cd0045d1749b",
+          "name": "Get senior portfolio value for a user",
+          "request": {
+            "name": "Get senior portfolio value for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartyield",
+                "users",
+                ":address",
+                "portfolio-value",
+                "senior"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eddb09d9-a3c3-4004-a80b-e5a4bb3adc33",
+              "name": "Senior portfolio value breakdown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartyield",
+                    "users",
+                    ":address",
+                    "portfolio-value",
+                    "senior"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-v2.barnbridge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a55e5206-fe10-40c1-957b-e5b0be697ba5",
+    "name": "BarnBridge Governance SMART Yield API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.\n\n\nContact Support:\n Name: BarnBridge Discord",
+      "type": "text/plain"
+    }
+  }
+}

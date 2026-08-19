@@ -1,0 +1,218 @@
+{
+  "item": [
+    {
+      "id": "4559ce1d-e134-40ca-a301-3257b9ec5fc4",
+      "name": "Yield Farming",
+      "description": {
+        "content": "Staking-actions analytics and charts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd220c67-97a1-4f7f-ab41-201cc46ea924",
+          "name": "List yield farming staking actions",
+          "request": {
+            "name": "List yield farming staking actions",
+            "description": {
+              "content": "Returns a paginated list of staking and unstaking events across BarnBridge yield farming pools.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "yieldfarming",
+                "staking-actions",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "993be5ad-d250-4004-b63a-1964e37ad224",
+              "name": "Paginated list of staking actions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "yieldfarming",
+                    "staking-actions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1017410a-7836-43ae-9bf4-be77dca3dfaa",
+          "name": "Get staking actions chart data",
+          "request": {
+            "name": "Get staking actions chart data",
+            "description": {
+              "content": "Returns historical time-series data for charting staking and unstaking volumes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "yieldfarming",
+                "staking-actions",
+                "chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "652926ee-7123-4816-b88d-951f42eab412",
+              "name": "Time-series staking actions chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "yieldfarming",
+                    "staking-actions",
+                    "chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-v2.barnbridge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7d949725-0853-40aa-9d27-5038f52723d3",
+    "name": "BarnBridge Governance Yield Farming API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.\n\n\nContact Support:\n Name: BarnBridge Discord",
+      "type": "text/plain"
+    }
+  }
+}

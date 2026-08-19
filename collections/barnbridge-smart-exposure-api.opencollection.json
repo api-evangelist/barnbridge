@@ -1,0 +1,229 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BarnBridge Governance SMART Exposure API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SMART Exposure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SMART Exposure pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/pools"
+          },
+          "docs": "Returns all SMART Exposure token-pair pools with their current state."
+        },
+        {
+          "info": {
+            "name": "List all SMART Exposure tranches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/tranches",
+            "params": [
+              {
+                "name": "poolAddress",
+                "value": "",
+                "type": "query",
+                "description": "Filter tranches by pool address."
+              }
+            ]
+          },
+          "docs": "List all SMART Exposure tranches"
+        },
+        {
+          "info": {
+            "name": "Get details for a SMART Exposure tranche",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/tranches/:eTokenAddress",
+            "params": [
+              {
+                "name": "eTokenAddress",
+                "value": "0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17",
+                "type": "path",
+                "description": "Ethereum address of the SMART Exposure eToken."
+              }
+            ]
+          },
+          "docs": "Get details for a SMART Exposure tranche"
+        },
+        {
+          "info": {
+            "name": "Get eToken price chart for a tranche",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/tranches/:eTokenAddress/etoken-price",
+            "params": [
+              {
+                "name": "eTokenAddress",
+                "value": "0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17",
+                "type": "path",
+                "description": "Ethereum address of the SMART Exposure eToken."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get eToken price chart for a tranche"
+        },
+        {
+          "info": {
+            "name": "Get underlying token price trend for a tranche",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/tranches/:eTokenAddress/price-trend",
+            "params": [
+              {
+                "name": "eTokenAddress",
+                "value": "0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17",
+                "type": "path",
+                "description": "Ethereum address of the SMART Exposure eToken."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get underlying token price trend for a tranche"
+        },
+        {
+          "info": {
+            "name": "Get liquidity chart for a SMART Exposure tranche",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/tranches/:eTokenAddress/liquidity",
+            "params": [
+              {
+                "name": "eTokenAddress",
+                "value": "0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17",
+                "type": "path",
+                "description": "Ethereum address of the SMART Exposure eToken."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get liquidity chart for a SMART Exposure tranche"
+        },
+        {
+          "info": {
+            "name": "Get ratio deviation chart for a SMART Exposure tranche",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/tranches/:eTokenAddress/ratio-deviation",
+            "params": [
+              {
+                "name": "eTokenAddress",
+                "value": "0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17",
+                "type": "path",
+                "description": "Ethereum address of the SMART Exposure eToken."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get ratio deviation chart for a SMART Exposure tranche"
+        },
+        {
+          "info": {
+            "name": "List SMART Exposure transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/transactions",
+            "params": [
+              {
+                "name": "eTokenAddress",
+                "value": "",
+                "type": "query",
+                "description": "Filter by eToken address."
+              },
+              {
+                "name": "userAddress",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user address."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List SMART Exposure transactions"
+        },
+        {
+          "info": {
+            "name": "Get portfolio value chart for a user in SMART Exposure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/smartexposure/users/:userAddress/portfolio-value",
+            "params": [
+              {
+                "name": "userAddress",
+                "value": "0xabcdef1234567890abcdef1234567890abcdef12",
+                "type": "path",
+                "description": "Ethereum address of the user."
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Get portfolio value chart for a user in SMART Exposure"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

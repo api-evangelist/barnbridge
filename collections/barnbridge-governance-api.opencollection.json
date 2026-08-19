@@ -1,0 +1,271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BarnBridge Governance API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Governance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List governance proposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/proposals",
+            "params": [
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Partial title search (case-insensitive)."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by proposal state. Use \"ACTIVE\" for in-progress or \"FAILED\" for ended proposals."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated, filterable list of BarnBridge DAO proposals."
+        },
+        {
+          "info": {
+            "name": "Get governance proposal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/proposals/:proposalID",
+            "params": [
+              {
+                "name": "proposalID",
+                "value": "42",
+                "type": "path",
+                "description": "Integer identifier of the governance or abrogation proposal."
+              }
+            ]
+          },
+          "docs": "Get governance proposal details"
+        },
+        {
+          "info": {
+            "name": "List votes for a governance proposal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/proposals/:proposalID/votes",
+            "params": [
+              {
+                "name": "proposalID",
+                "value": "42",
+                "type": "path",
+                "description": "Integer identifier of the governance or abrogation proposal."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List votes for a governance proposal"
+        },
+        {
+          "info": {
+            "name": "List events for a governance proposal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/proposals/:proposalID/events",
+            "params": [
+              {
+                "name": "proposalID",
+                "value": "42",
+                "type": "path",
+                "description": "Integer identifier of the governance or abrogation proposal."
+              }
+            ]
+          },
+          "docs": "List events for a governance proposal"
+        },
+        {
+          "info": {
+            "name": "Get governance protocol overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/overview"
+          },
+          "docs": "Returns aggregate statistics about BOND staking, vBOND delegation, and governance participation."
+        },
+        {
+          "info": {
+            "name": "List governance voters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/voters",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List governance voters"
+        },
+        {
+          "info": {
+            "name": "List abrogation proposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/abrogation-proposals",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List abrogation proposals"
+        },
+        {
+          "info": {
+            "name": "Get abrogation proposal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/abrogation-proposals/:proposalID",
+            "params": [
+              {
+                "name": "proposalID",
+                "value": "42",
+                "type": "path",
+                "description": "Integer identifier of the governance or abrogation proposal."
+              }
+            ]
+          },
+          "docs": "Get abrogation proposal details"
+        },
+        {
+          "info": {
+            "name": "List votes for an abrogation proposal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/abrogation-proposals/:proposalID/votes",
+            "params": [
+              {
+                "name": "proposalID",
+                "value": "42",
+                "type": "path",
+                "description": "Integer identifier of the governance or abrogation proposal."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List votes for an abrogation proposal"
+        },
+        {
+          "info": {
+            "name": "List DAO treasury transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/treasury/transactions",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "List DAO treasury transactions"
+        },
+        {
+          "info": {
+            "name": "List tokens held in the DAO treasury",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/governance/treasury/tokens"
+          },
+          "docs": "List tokens held in the DAO treasury"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

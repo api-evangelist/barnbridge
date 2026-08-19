@@ -1,0 +1,952 @@
+{
+  "item": [
+    {
+      "id": "8a1d1c54-271b-402b-a0c8-771b19d3db31",
+      "name": "SMART Exposure",
+      "description": {
+        "content": "Automated token-ratio rebalancing tranches",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "477596ea-a798-4378-bbd0-908a34e7a45d",
+          "name": "List SMART Exposure pools",
+          "request": {
+            "name": "List SMART Exposure pools",
+            "description": {
+              "content": "Returns all SMART Exposure token-pair pools with their current state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9aeeb118-2c41-464e-8146-04a37bf7837a",
+              "name": "Array of SMART Exposure pool objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e274ada-704f-475f-a98b-b4c566ae4838",
+          "name": "List all SMART Exposure tranches",
+          "request": {
+            "name": "List all SMART Exposure tranches",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "tranches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "poolAddress",
+                  "value": "<string>",
+                  "description": "Filter tranches by pool address."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "826b2730-20ef-4748-9c82-8b599c6b5483",
+              "name": "Array of tranche objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "poolAddress",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38c4e185-2fe3-47be-9011-9d1665d7ed21",
+          "name": "Get details for a SMART Exposure tranche",
+          "request": {
+            "name": "Get details for a SMART Exposure tranche",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "tranches",
+                ":eTokenAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eTokenAddress",
+                  "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29782594-60ca-4172-940e-85e63fe28257",
+              "name": "Single tranche object with state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches",
+                    ":eTokenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eTokenAddress",
+                      "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae3d5391-6911-476e-90ee-5352570ad812",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches",
+                    ":eTokenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eTokenAddress",
+                      "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"invalid pool address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b83c3f89-2d9b-4d45-8498-dde2b34ee988",
+          "name": "Get eToken price chart for a tranche",
+          "request": {
+            "name": "Get eToken price chart for a tranche",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "tranches",
+                ":eTokenAddress",
+                "etoken-price"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eTokenAddress",
+                  "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b834e60f-a083-41e5-a448-b201aaf0ec21",
+              "name": "Time-series eToken price data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches",
+                    ":eTokenAddress",
+                    "etoken-price"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eTokenAddress",
+                      "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70f7717e-5f7a-4038-bf00-58a8a75f38a0",
+          "name": "Get underlying token price trend for a tranche",
+          "request": {
+            "name": "Get underlying token price trend for a tranche",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "tranches",
+                ":eTokenAddress",
+                "price-trend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eTokenAddress",
+                  "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11cfe06a-478b-4e73-8d20-ccdb096f7838",
+              "name": "Time-series underlying-token price trend data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches",
+                    ":eTokenAddress",
+                    "price-trend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eTokenAddress",
+                      "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c80b53b-82e6-4a15-b40c-1b33662f5704",
+          "name": "Get liquidity chart for a SMART Exposure tranche",
+          "request": {
+            "name": "Get liquidity chart for a SMART Exposure tranche",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "tranches",
+                ":eTokenAddress",
+                "liquidity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eTokenAddress",
+                  "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0aadf983-49ff-407a-936a-a692e7ecb71c",
+              "name": "Time-series liquidity chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches",
+                    ":eTokenAddress",
+                    "liquidity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eTokenAddress",
+                      "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3857063a-1ba3-4598-8b3c-e1e18c0dc5d4",
+          "name": "Get ratio deviation chart for a SMART Exposure tranche",
+          "request": {
+            "name": "Get ratio deviation chart for a SMART Exposure tranche",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "tranches",
+                ":eTokenAddress",
+                "ratio-deviation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eTokenAddress",
+                  "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71180a7a-b89b-4eb3-b44a-4e68641033d1",
+              "name": "Time-series ratio-deviation chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "tranches",
+                    ":eTokenAddress",
+                    "ratio-deviation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eTokenAddress",
+                      "description": "(Required) Ethereum address of the SMART Exposure eToken."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02d43829-39c6-4cfe-81d0-12d64d88e3ab",
+          "name": "List SMART Exposure transactions",
+          "request": {
+            "name": "List SMART Exposure transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eTokenAddress",
+                  "value": "<string>",
+                  "description": "Filter by eToken address."
+                },
+                {
+                  "disabled": false,
+                  "key": "userAddress",
+                  "value": "<string>",
+                  "description": "Filter by user address."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1246d0a9-7310-40fa-8fbe-2544448542a5",
+              "name": "Paginated list of SMART Exposure transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eTokenAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53aa30a1-fb20-4d48-b16e-5fcc33fa9dab",
+          "name": "Get portfolio value chart for a user in SMART Exposure",
+          "request": {
+            "name": "Get portfolio value chart for a user in SMART Exposure",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "smartexposure",
+                "users",
+                ":userAddress",
+                "portfolio-value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "30d",
+                  "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userAddress",
+                  "description": "(Required) Ethereum address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41ef9171-0894-4c39-a372-d2d877102ab7",
+              "name": "Time-series portfolio value chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "smartexposure",
+                    "users",
+                    ":userAddress",
+                    "portfolio-value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "30d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userAddress",
+                      "description": "(Required) Ethereum address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"meta\": {\n    \"count\": 125,\n    \"block\": {\n      \"blockNumber\": 15234567,\n      \"blockTimestamp\": 1660000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-v2.barnbridge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57d51e7d-1d5e-46bf-ab18-0f581f79491e",
+    "name": "BarnBridge Governance SMART Exposure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.\n\n\nContact Support:\n Name: BarnBridge Discord",
+      "type": "text/plain"
+    }
+  }
+}

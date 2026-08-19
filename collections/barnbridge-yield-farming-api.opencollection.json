@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BarnBridge Governance Yield Farming API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Yield Farming",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List yield farming staking actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/yieldfarming/staking-actions/list",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of staking and unstaking events across BarnBridge yield farming pools."
+        },
+        {
+          "info": {
+            "name": "Get staking actions chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.barnbridge.com/api/yieldfarming/staking-actions/chart",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for chart/trend data (e.g. \"24h\", \"7d\", \"30d\")."
+              }
+            ]
+          },
+          "docs": "Returns historical time-series data for charting staking and unstaking volumes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
