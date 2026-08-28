@@ -1,5 +1,17 @@
 name: BarnBridge
 description: BarnBridge is a risk tokenization DeFi protocol that allows users to hedge yield sensitivity and price volatility by transforming debt pools into structured products with varying risk and return characteristics. It offers SMART Yield bonds with junior and senior tranches, SMART Alpha for price volatility management, SMART Exposure for automated rebalancing, and yield farming analytics via a REST API.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: open
