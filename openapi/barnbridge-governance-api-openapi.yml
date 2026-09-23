@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: BarnBridge Governance API
-  description: 'BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
-
-    '
+  description: BarnBridge is a risk tokenization DeFi protocol. This REST API exposes endpoints for querying SMART Yield structured products, SMART Alpha price-volatility pools, SMART Exposure automated-rebalancing tranches, DAO Governance proposals and treasury data, and Yield Farming staking analytics.
   version: 2.0.0
   contact:
     name: BarnBridge Discord
@@ -219,26 +217,6 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    Meta:
-      type: object
-      description: Optional metadata accompanying paginated or block-aware responses.
-      properties:
-        count:
-          type: integer
-          description: Total record count (for paginated endpoints).
-          example: 125
-        block:
-          $ref: '#/components/schemas/BlockInfo'
-    ErrorResponse:
-      type: object
-      description: Standard error envelope.
-      properties:
-        status:
-          type: integer
-          example: 400
-        error:
-          type: string
-          example: invalid pool address
     SuccessResponse:
       type: object
       description: Standard API success envelope.
@@ -254,6 +232,26 @@ components:
           - type: object
         meta:
           $ref: '#/components/schemas/Meta'
+    ErrorResponse:
+      type: object
+      description: Standard error envelope.
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: invalid pool address
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
     BlockInfo:
       type: object
       description: Ethereum block context at the time of the query.
@@ -267,13 +265,6 @@ components:
           format: int64
           description: Unix timestamp of the block.
           example: 1660000000
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     pageParam:
       name: page
@@ -302,3 +293,10 @@ components:
         format: int64
         minimum: 1
       example: 42
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
