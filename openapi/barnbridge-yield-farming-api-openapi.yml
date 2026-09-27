@@ -52,51 +52,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
-  parameters:
-    windowParam:
-      name: window
-      in: query
-      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
-      schema:
-        type: string
-        enum:
-        - 24h
-        - 7d
-        - 30d
-        default: 30d
-    pageParam:
-      name: page
-      in: query
-      description: 1-based page number for pagination.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    limitParam:
-      name: limit
-      in: query
-      description: Number of items per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
   schemas:
-    SuccessResponse:
-      type: object
-      description: Standard API success envelope.
-      properties:
-        status:
-          type: integer
-          example: 200
-        data:
-          description: Response payload — array or object depending on endpoint.
-          oneOf:
-          - type: array
-            items: {}
-          - type: object
-        meta:
-          $ref: '#/components/schemas/Meta'
     Meta:
       type: object
       description: Optional metadata accompanying paginated or block-aware responses.
@@ -120,3 +76,47 @@ components:
           format: int64
           description: Unix timestamp of the block.
           example: 1660000000
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
+  parameters:
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 7d
+        - 30d
+        default: 30d
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1

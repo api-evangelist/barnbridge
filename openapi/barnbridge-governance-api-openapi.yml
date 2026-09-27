@@ -216,7 +216,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    Meta:
+      type: object
+      description: Optional metadata accompanying paginated or block-aware responses.
+      properties:
+        count:
+          type: integer
+          description: Total record count (for paginated endpoints).
+          example: 125
+        block:
+          $ref: '#/components/schemas/BlockInfo'
+    ErrorResponse:
+      type: object
+      description: Standard error envelope.
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: invalid pool address
+    BlockInfo:
+      type: object
+      description: Ethereum block context at the time of the query.
+      properties:
+        blockNumber:
+          type: integer
+          format: int64
+          example: 15234567
+        blockTimestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp of the block.
+          example: 1660000000
     SuccessResponse:
       type: object
       description: Standard API success envelope.
@@ -232,48 +272,7 @@ components:
           - type: object
         meta:
           $ref: '#/components/schemas/Meta'
-    ErrorResponse:
-      type: object
-      description: Standard error envelope.
-      properties:
-        status:
-          type: integer
-          example: 400
-        error:
-          type: string
-          example: invalid pool address
-    Meta:
-      type: object
-      description: Optional metadata accompanying paginated or block-aware responses.
-      properties:
-        count:
-          type: integer
-          description: Total record count (for paginated endpoints).
-          example: 125
-        block:
-          $ref: '#/components/schemas/BlockInfo'
-    BlockInfo:
-      type: object
-      description: Ethereum block context at the time of the query.
-      properties:
-        blockNumber:
-          type: integer
-          format: int64
-          example: 15234567
-        blockTimestamp:
-          type: integer
-          format: int64
-          description: Unix timestamp of the block.
-          example: 1660000000
   parameters:
-    pageParam:
-      name: page
-      in: query
-      description: 1-based page number for pagination.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
     limitParam:
       name: limit
       in: query
@@ -283,6 +282,14 @@ components:
         minimum: 1
         maximum: 100
         default: 10
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     proposalID:
       name: proposalID
       in: path
@@ -293,10 +300,3 @@ components:
         format: int64
         minimum: 1
       example: 42
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
