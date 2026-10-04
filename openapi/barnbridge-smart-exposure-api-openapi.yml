@@ -181,6 +181,44 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
+  parameters:
+    windowParam:
+      name: window
+      in: query
+      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
+      schema:
+        type: string
+        enum:
+        - 24h
+        - 7d
+        - 30d
+        default: 30d
+    pageParam:
+      name: page
+      in: query
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    eTokenAddress:
+      name: eTokenAddress
+      in: path
+      required: true
+      description: Ethereum address of the SMART Exposure eToken.
+      schema:
+        type: string
+        pattern: ^0x[0-9a-fA-F]{40}$
+      example: '0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17'
+    limitParam:
+      name: limit
+      in: query
+      description: Number of items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
   schemas:
     Meta:
       type: object
@@ -192,21 +230,6 @@ components:
           example: 125
         block:
           $ref: '#/components/schemas/BlockInfo'
-    SuccessResponse:
-      type: object
-      description: Standard API success envelope.
-      properties:
-        status:
-          type: integer
-          example: 200
-        data:
-          description: Response payload — array or object depending on endpoint.
-          oneOf:
-          - type: array
-            items: {}
-          - type: object
-        meta:
-          $ref: '#/components/schemas/Meta'
     BlockInfo:
       type: object
       description: Ethereum block context at the time of the query.
@@ -230,44 +253,21 @@ components:
         error:
           type: string
           example: invalid pool address
-  parameters:
-    pageParam:
-      name: page
-      in: query
-      description: 1-based page number for pagination.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    limitParam:
-      name: limit
-      in: query
-      description: Number of items per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    eTokenAddress:
-      name: eTokenAddress
-      in: path
-      required: true
-      description: Ethereum address of the SMART Exposure eToken.
-      schema:
-        type: string
-        pattern: ^0x[0-9a-fA-F]{40}$
-      example: '0xb4d09ff3dA7f9e9A2BA029cb0A81A989fd7B8f17'
-    windowParam:
-      name: window
-      in: query
-      description: Time window for chart/trend data (e.g. "24h", "7d", "30d").
-      schema:
-        type: string
-        enum:
-        - 24h
-        - 7d
-        - 30d
-        default: 30d
+    SuccessResponse:
+      type: object
+      description: Standard API success envelope.
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          description: Response payload — array or object depending on endpoint.
+          oneOf:
+          - type: array
+            items: {}
+          - type: object
+        meta:
+          $ref: '#/components/schemas/Meta'
   responses:
     NotFound:
       description: Resource not found.
