@@ -64,31 +64,138 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-BarnBridge is a risk tokenization DeFi protocol that allows users to hedge yield sensitivity and price volatility. It transforms single debt pools into multiple assets with varying risk and return characteristics through structured products including SMART Yield bonds, SMART Alpha, and SMART Exposure.
+BarnBridge is a risk tokenization DeFi protocol that allows users to hedge yield sensitivity and price volatility by transforming debt pools into structured products with varying risk and return characteristics. It offers SMART Yield bonds with junior and senior tranches, SMART Alpha for price volatility management, SMART Exposure for automated rebalancing, and yield farming analytics via a REST API.
 
-## Products
+**Areas:** DeFi · Risk Tokenization · Yield · Blockchain · Ethereum · SMART Yield · Structured Products · Tranches
 
-- **SMART Yield** - Fixed and variable yield structured products with junior and senior tranches backed by Aave, Compound, and other lending protocols
-- **SMART Alpha** - Price volatility risk management through epoch-based structured pools
-- **SMART Exposure** - Automated portfolio rebalancing between asset pairs via tranches
-- **Yield Farming** - BOND token yield farming and staking analytics
+## BarnBridge on APIs.io
 
-## APIs
+Everything profiled for BarnBridge is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/barnbridge/](https://apis.io/providers/barnbridge/)** — or go straight to one of the APIs or properties below.
 
-The BarnBridge internal API is a Go-based REST API running at `https://api-v2.barnbridge.com` that powers the BarnBridge application. It exposes endpoints organized by product module:
+### APIs (5)
 
-- `/api/smartyield/*` - SMART Yield pools, bonds, APY, liquidity, user positions
-- `/api/governance/*` - DAO proposals, votes, treasury, governance overview
-- `/api/smartalpha/*` - SMART Alpha pools, epochs, performance, user positions
-- `/api/smartexposure/*` - eToken tranches, price trends, liquidity, ratio deviation
-- `/api/yieldfarming/*` - Staking actions list and historical charts
+- [BarnBridge Governance API](https://apis.io/apis/barnbridge/barnbridge-governance-api/) — BarnBridge DAO proposals, voting, and treasury
+- [BarnBridge SMART Alpha API](https://apis.io/apis/barnbridge/barnbridge-smart-alpha-api/) — Price-volatility pools with upside exposure and downside protection
+- [BarnBridge SMART Exposure API](https://apis.io/apis/barnbridge/barnbridge-smart-exposure-api/) — Automated token-ratio rebalancing tranches
+- [BarnBridge SMART Yield API](https://apis.io/apis/barnbridge/barnbridge-smart-yield-api/) — Structured-product yield pools with senior/junior tranches
+- [BarnBridge Yield Farming API](https://apis.io/apis/barnbridge/barnbridge-yield-farming-api/) — Staking-actions analytics and charts
 
-## Resources
+### Published properties
 
-- Website: https://barnbridge.com
-- App: https://app.barnbridge.com
-- Documentation: https://barnbridge.gitbook.io/docs
-- GitHub: https://github.com/BarnBridge
-- Discord: https://discord.com/invite/FfEhsVk
-- Forum: https://forum.barnbridge.com
-- Whitepaper: https://github.com/BarnBridge/BarnBridge-Whitepaper
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Barnbridge Agentic Access](https://apis.io/agentic-access/barnbridge/barnbridge-agentic-access/)
+
+#### JSON Schema (4)
+
+The data models the API reads and writes.
+
+- [GovernanceProposal](https://apis.io/schemas/barnbridge/governance-proposal/)
+- [SmartAlphaPool](https://apis.io/schemas/barnbridge/smart-alpha-pool/)
+- [SmartExposureTranche](https://apis.io/schemas/barnbridge/smart-exposure-tranche/)
+- [SmartYieldPool](https://apis.io/schemas/barnbridge/smart-yield-pool/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [context Context](https://apis.io/jsonld/barnbridge/context/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [BarnBridge Governance API](https://apis.io/collections/barnbridge/open-barnbridge-governance-api/)
+- [BarnBridge Governance SMART Alpha API](https://apis.io/collections/barnbridge/open-barnbridge-smart-alpha-api/)
+- [BarnBridge Governance SMART Exposure API](https://apis.io/collections/barnbridge/open-barnbridge-smart-exposure-api/)
+- [BarnBridge Governance SMART Yield API](https://apis.io/collections/barnbridge/open-barnbridge-smart-yield-api/)
+- [BarnBridge Governance Yield Farming API](https://apis.io/collections/barnbridge/open-barnbridge-yield-farming-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [BarnBridge — jsonschema rules](https://apis.io/rules/barnbridge/barnbridge-jsonschema-spectral-rules/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/barnbridge/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/barnbridge/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/barnbridge/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://barnbridge.com)
+- [Documentation](https://barnbridge.gitbook.io/docs)
+- [GitHub](https://github.com/BarnBridge)
+
+## API Evangelist rating
+
+**Kin Score 21.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 43.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 14.3 |
+| Access clarity | 5.3 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 4.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/barnbridge/](https://apis.io/providers/barnbridge/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BarnBridge: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/barnbridge/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
